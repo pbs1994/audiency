@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 import { STATIC_ROUTES } from "@/lib/i18n";
 
 // Map every English public path to its internal (French-named) route folder path.
@@ -27,8 +28,10 @@ function translateEnPath(pathAfterLocale: string): string {
   return pathAfterLocale;
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  let response: ReturnType<typeof NextResponse.next>;
 
   if (pathname === "/en" || pathname.startsWith("/en/")) {
     const after = pathname.slice(3).replace(/^\//, "");
@@ -36,19 +39,43 @@ export function proxy(request: NextRequest) {
     if (translated !== after) {
       const url = request.nextUrl.clone();
       url.pathname = translated ? `/en/${translated}` : "/en";
-      return NextResponse.rewrite(url);
+      response = NextResponse.rewrite(url);
+    } else {
+      response = NextResponse.next();
     }
-    return NextResponse.next();
+  } else if (pathname === "/fr" || pathname.startsWith("/fr/")) {
+    // Already-internal /fr path (not a canonical public link, but avoid double-prefixing it).
+    response = NextResponse.next();
+  } else {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === "/" ? "/fr" : `/fr${pathname}`;
+    response = NextResponse.rewrite(url);
   }
 
-  // Already-internal /fr path (not a canonical public link, but avoid double-prefixing it).
-  if (pathname === "/fr" || pathname.startsWith("/fr/")) {
-    return NextResponse.next();
+  // Keep the Supabase auth session fresh on every navigation. This only
+  // touches cookies — it never blocks or redirects a route itself; each
+  // page decides for itself whether it needs a signed-in user. Skipped
+  // entirely (rather than failing every request) until Supabase env vars
+  // are configured, so the rest of the site keeps working either way.
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (supabaseUrl && supabaseAnonKey) {
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options);
+          });
+        },
+      },
+    });
+    await supabase.auth.getUser();
   }
 
-  const url = request.nextUrl.clone();
-  url.pathname = pathname === "/" ? "/fr" : `/fr${pathname}`;
-  return NextResponse.rewrite(url);
+  return response;
 }
 
 export const config = {

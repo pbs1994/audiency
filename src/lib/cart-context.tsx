@@ -9,6 +9,12 @@ export type CartItem = {
   name: string;
   detail: string;
   priceValue: number;
+  /** Structured fields, used to build a real order at checkout. */
+  platformSlug?: string;
+  serviceSlug?: string;
+  quantity?: number;
+  unit?: string;
+  targetUrl?: string;
 };
 
 type CartContextValue = {

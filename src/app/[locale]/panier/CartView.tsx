@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { useCurrency } from "@/lib/currency-context";
 import PlatformLogo from "@/components/PlatformLogo";
 import { routeHref, type Locale } from "@/lib/i18n";
+import { createOrder } from "./actions";
 
 const T = {
   fr: {
@@ -18,7 +21,11 @@ const T = {
     cashback: "Cashback (15%)",
     total: "Total",
     checkout: "Procéder au paiement",
+    checkoutPending: "Validation…",
+    loginToPay: "Se connecter pour valider",
     secure: "Paiement sécurisé · Satisfait ou remboursé 30 jours",
+    demoNotice: "Mode démo : aucun paiement réel n’est traité pour le moment.",
+    error: "Une erreur est survenue, merci de réessayer.",
   },
   en: {
     empty: "Your cart is empty",
@@ -30,14 +37,34 @@ const T = {
     cashback: "Cashback (15%)",
     total: "Total",
     checkout: "Proceed to checkout",
+    checkoutPending: "Placing order…",
+    loginToPay: "Log in to checkout",
     secure: "Secure payment · 30-day money-back guarantee",
+    demoNotice: "Demo mode: no real payment is processed yet.",
+    error: "Something went wrong, please try again.",
   },
 };
 
-export default function CartView({ locale }: { locale: Locale }) {
+export default function CartView({ locale, loggedIn }: { locale: Locale; loggedIn: boolean }) {
   const t = T[locale];
-  const { items, removeItem } = useCart();
+  const router = useRouter();
+  const { items, removeItem, clear } = useCart();
   const { format } = useCurrency();
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleCheckout = async () => {
+    setPending(true);
+    setError(null);
+    const result = await createOrder(items);
+    if ("error" in result) {
+      setError(t.error);
+      setPending(false);
+      return;
+    }
+    clear();
+    router.push(routeHref(locale, "accountOrders"));
+  };
 
   if (items.length === 0) {
     return (
@@ -105,13 +132,26 @@ export default function CartView({ locale }: { locale: Locale }) {
           <span>{t.total}</span>
           <span>{format(subtotal)}</span>
         </div>
-        <button
-          type="button"
-          className="mt-6 w-full rounded-full gradient-brand py-3 text-sm font-bold text-white"
-        >
-          {t.checkout}
-        </button>
+        {loggedIn ? (
+          <button
+            type="button"
+            onClick={handleCheckout}
+            disabled={pending}
+            className="mt-6 w-full rounded-full gradient-brand py-3 text-sm font-bold text-white disabled:opacity-60"
+          >
+            {pending ? t.checkoutPending : t.checkout}
+          </button>
+        ) : (
+          <Link
+            href={routeHref(locale, "login")}
+            className="mt-6 flex w-full items-center justify-center rounded-full gradient-brand py-3 text-sm font-bold text-white"
+          >
+            {t.loginToPay}
+          </Link>
+        )}
+        {error && <p className="mt-3 text-center text-sm font-medium text-rose">{error}</p>}
         <p className="mt-3 text-center text-xs text-text-muted">{t.secure}</p>
+        <p className="mt-1 text-center text-[11px] text-text-muted">{t.demoNotice}</p>
       </div>
     </div>
   );

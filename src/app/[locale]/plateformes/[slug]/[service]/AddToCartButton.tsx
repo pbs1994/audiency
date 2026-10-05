@@ -14,6 +14,8 @@ export default function AddToCartButton({
   detail,
   priceEUR,
   idPrefix,
+  platformSlug,
+  serviceSlug,
 }: {
   locale: Locale;
   logoName: string;
@@ -21,6 +23,8 @@ export default function AddToCartButton({
   detail: string;
   priceEUR: number;
   idPrefix: string;
+  platformSlug: string;
+  serviceSlug: string;
 }) {
   const router = useRouter();
   const { addItem } = useCart();
@@ -36,6 +40,9 @@ export default function AddToCartButton({
           name,
           detail,
           priceValue: priceEUR,
+          platformSlug,
+          serviceSlug,
+          quantity: 1,
         });
         router.push(routeHref(locale, "cart"));
       }}

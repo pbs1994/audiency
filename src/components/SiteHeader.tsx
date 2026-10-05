@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, ShoppingCart, User, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ShoppingCart, ChevronDown, ChevronRight } from "lucide-react";
 import PlatformLogo from "./PlatformLogo";
 import LocaleSwitcher from "./LocaleSwitcher";
+import AccountLink from "./AccountLink";
 import { getPlatform, PLATFORMS } from "@/lib/platforms";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
@@ -21,7 +22,6 @@ const T = {
     store: "Boutique",
     more: "Plus",
     freeServices: "Services Gratuits",
-    login: "Connexion",
     cart: "Panier",
     trackOrder: "Suivre ma commande",
     closeMenu: "Fermer le menu",
@@ -34,7 +34,6 @@ const T = {
     store: "Store",
     more: "More",
     freeServices: "Free Services",
-    login: "Login",
     cart: "Cart",
     trackOrder: "Track my order",
     closeMenu: "Close menu",
@@ -225,12 +224,7 @@ export default function SiteHeader() {
               </span>
             )}
           </Link>
-          <Link
-            href={routeHref(locale, "login")}
-            className="flex items-center gap-1.5 text-sm font-medium text-text hover:text-violet"
-          >
-            <User size={16} /> {t.login}
-          </Link>
+          <AccountLink />
         </div>
 
         <button
@@ -263,13 +257,9 @@ export default function SiteHeader() {
             <Link href={routeHref(locale, "trackOrder")} className="text-sm text-text-muted" onClick={() => setOpen(false)}>
               {t.trackOrder}
             </Link>
-            <Link
-              href={routeHref(locale, "login")}
-              className="mt-2 text-sm font-medium text-text"
-              onClick={() => setOpen(false)}
-            >
-              {t.login}
-            </Link>
+            <div className="mt-2">
+              <AccountLink onNavigate={() => setOpen(false)} />
+            </div>
           </nav>
         </div>
       )}

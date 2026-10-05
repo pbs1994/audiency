@@ -28,6 +28,8 @@ export const STATIC_ROUTES = {
   cart: { fr: "panier", en: "cart" },
   trackOrder: { fr: "suivi-commande", en: "track-order" },
   balance: { fr: "solde", en: "balance" },
+  account: { fr: "compte", en: "account" },
+  accountOrders: { fr: "compte/commandes", en: "account/orders" },
 } as const;
 
 export type RouteKey = keyof typeof STATIC_ROUTES;

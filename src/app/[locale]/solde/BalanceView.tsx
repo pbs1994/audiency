@@ -1,55 +1,64 @@
-"use client";
-
 import { Gift } from "lucide-react";
-import { useCurrency } from "@/lib/currency-context";
+import Price from "@/components/Price";
 import type { Locale } from "@/lib/i18n";
 
-const HISTORY = {
-  fr: [
-    { label: "Cashback — commande #A-20481", amountEUR: 0.24, date: "28 sept. 2026" },
-    { label: "Cashback — commande #A-19207", amountEUR: 0.45, date: "14 sept. 2026" },
-    { label: "Crédit de bienvenue", amountEUR: 2.0, date: "2 sept. 2026" },
-  ],
-  en: [
-    { label: "Cashback — order #A-20481", amountEUR: 0.24, date: "Sep 28, 2026" },
-    { label: "Cashback — order #A-19207", amountEUR: 0.45, date: "Sep 14, 2026" },
-    { label: "Welcome credit", amountEUR: 2.0, date: "Sep 2, 2026" },
-  ],
+export type WalletTransaction = {
+  id: string;
+  type: string;
+  amount_eur: number;
+  description: string | null;
+  created_at: string;
 };
 
 const T = {
-  fr: { available: "Solde disponible", history: "Historique" },
-  en: { available: "Available balance", history: "History" },
+  fr: { available: "Solde disponible", history: "Historique", empty: "Aucun mouvement pour le moment." },
+  en: { available: "Available balance", history: "History", empty: "No activity yet." },
 };
 
-export default function BalanceView({ locale }: { locale: Locale }) {
+export default function BalanceView({
+  locale,
+  balanceEUR,
+  history,
+}: {
+  locale: Locale;
+  balanceEUR: number;
+  history: WalletTransaction[];
+}) {
   const t = T[locale];
-  const history = HISTORY[locale];
-  const { format } = useCurrency();
-  const total = history.reduce((sum, h) => sum + h.amountEUR, 0);
 
   return (
     <>
       <div className="flex items-center justify-between rounded-2xl gradient-brand p-6 text-white">
         <div>
           <p className="text-sm text-white/80">{t.available}</p>
-          <p className="mt-1 text-3xl font-extrabold">{format(total)}</p>
+          <p className="mt-1 text-3xl font-extrabold">
+            <Price amountEUR={balanceEUR} />
+          </p>
         </div>
         <Gift size={28} />
       </div>
 
       <h2 className="mt-10 font-bold text-text">{t.history}</h2>
-      <div className="mt-4 divide-y divide-border border-y border-border">
-        {history.map((h) => (
-          <div key={h.label} className="flex items-center justify-between py-4 text-sm">
-            <div>
-              <p className="text-text">{h.label}</p>
-              <p className="text-xs text-text-muted">{h.date}</p>
+      {history.length === 0 ? (
+        <p className="mt-4 text-sm text-text-muted">{t.empty}</p>
+      ) : (
+        <div className="mt-4 divide-y divide-border border-y border-border">
+          {history.map((h) => (
+            <div key={h.id} className="flex items-center justify-between py-4 text-sm">
+              <div>
+                <p className="text-text">{h.description ?? h.type}</p>
+                <p className="text-xs text-text-muted">
+                  {new Date(h.created_at).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US")}
+                </p>
+              </div>
+              <span className={`font-semibold ${h.amount_eur >= 0 ? "text-green" : "text-rose"}`}>
+                {h.amount_eur >= 0 ? "+" : ""}
+                <Price amountEUR={h.amount_eur} />
+              </span>
             </div>
-            <span className="font-semibold text-green">+{format(h.amountEUR)}</span>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }

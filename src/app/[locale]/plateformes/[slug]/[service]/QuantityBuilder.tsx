@@ -69,6 +69,8 @@ export default function QuantityBuilder({
   serviceName,
   platformName,
   idPrefix,
+  platformSlug,
+  serviceSlug,
   followerType = false,
   genderOption = false,
 }: {
@@ -80,6 +82,8 @@ export default function QuantityBuilder({
   serviceName: string;
   platformName: string;
   idPrefix: string;
+  platformSlug: string;
+  serviceSlug: string;
   followerType?: boolean;
   genderOption?: boolean;
 }) {
@@ -130,6 +134,11 @@ export default function QuantityBuilder({
       name: `${serviceName} ${platformName}`,
       detail: `${formatQty(selected.qty)} ${unit}${optionSuffix ? ` · ${optionSuffix}` : ""}`,
       priceValue: selected.final,
+      platformSlug,
+      serviceSlug,
+      quantity: selected.qty,
+      unit,
+      targetUrl: username.trim() || undefined,
     });
     router.push(routeHref(locale, "cart"));
   };

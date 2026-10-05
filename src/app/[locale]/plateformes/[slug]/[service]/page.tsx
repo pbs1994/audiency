@@ -289,6 +289,8 @@ export default async function ServicePage(props: PageProps<"/[locale]/plateforme
               serviceName={serviceName}
               platformName={platformName}
               idPrefix={`${platform.slug}:${service.slug}`}
+              platformSlug={platform.slug}
+              serviceSlug={service.slug}
               followerType={service.followerType}
               genderOption={service.genderOption}
             />
@@ -313,6 +315,8 @@ export default async function ServicePage(props: PageProps<"/[locale]/plateforme
                 detail={serviceDetail}
                 priceEUR={service.priceEUR}
                 idPrefix={`${platform.slug}:${service.slug}`}
+                platformSlug={platform.slug}
+                serviceSlug={service.slug}
               />
             </div>
           )}
