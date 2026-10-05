@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useSyncExternalStore, type ReactNode } from "react";
+import { createLocalStore } from "./local-store";
 
 export type CartItem = {
   id: string;
@@ -18,40 +19,25 @@ type CartContextValue = {
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "boostinflu-cart";
+const store = createLocalStore<CartItem[]>("boostinflu-cart", []);
+
+/** Module-level so it's never called from within a component's render body. */
+export function createCartItemId(prefix: string) {
+  return `${prefix}:${Date.now()}`;
+}
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setItems(JSON.parse(raw));
-    } catch {
-      // ignore corrupted storage
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    } catch {
-      // ignore quota errors
-    }
-  }, [items, hydrated]);
+  const items = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getServerSnapshot);
 
   const addItem = (item: CartItem) => {
-    setItems((prev) => [...prev, item]);
+    store.setValue((prev) => [...prev, item]);
   };
 
   const removeItem = (id: string) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
+    store.setValue((prev) => prev.filter((i) => i.id !== id));
   };
 
-  const clear = () => setItems([]);
+  const clear = () => store.setValue([]);
 
   return (
     <CartContext.Provider value={{ items, addItem, removeItem, clear }}>

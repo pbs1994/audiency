@@ -1,50 +1,73 @@
 import type { MetadataRoute } from "next";
 import { PLATFORMS } from "@/lib/platforms";
+import { STATIC_ROUTES, routeHref, platformHref, serviceHref, type RouteKey } from "@/lib/i18n";
 
 const BASE_URL = "https://boostinflu.fr";
 
-const STATIC_PATHS = [
-  { path: "/", priority: 1, changeFrequency: "daily" as const },
-  { path: "/plateformes", priority: 0.9, changeFrequency: "weekly" as const },
-  { path: "/outils-gratuits", priority: 0.6, changeFrequency: "monthly" as const },
-  { path: "/outils-gratuits/calculateur-engagement", priority: 0.5, changeFrequency: "monthly" as const },
-  { path: "/outils-gratuits/generateur-hashtags", priority: 0.5, changeFrequency: "monthly" as const },
-  { path: "/a-propos", priority: 0.4, changeFrequency: "yearly" as const },
-  { path: "/contact", priority: 0.4, changeFrequency: "yearly" as const },
-  { path: "/connexion", priority: 0.3, changeFrequency: "yearly" as const },
-  { path: "/panier", priority: 0.2, changeFrequency: "monthly" as const },
-  { path: "/suivi-commande", priority: 0.3, changeFrequency: "monthly" as const },
-  { path: "/solde", priority: 0.2, changeFrequency: "monthly" as const },
-  { path: "/conditions-utilisation", priority: 0.2, changeFrequency: "yearly" as const },
-  { path: "/confidentialite", priority: 0.2, changeFrequency: "yearly" as const },
-  { path: "/remboursement", priority: 0.2, changeFrequency: "yearly" as const },
-];
+const PRIORITIES: Partial<Record<RouteKey, number>> = {
+  home: 1,
+  platforms: 0.9,
+  freeTools: 0.6,
+  engagementCalculator: 0.5,
+  hashtagGenerator: 0.5,
+  trackOrder: 0.3,
+  login: 0.3,
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const entries: MetadataRoute.Sitemap = [];
 
-  const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map((p) => ({
-    url: `${BASE_URL}${p.path}`,
-    lastModified: now,
-    changeFrequency: p.changeFrequency,
-    priority: p.priority,
-  }));
-
-  const platformEntries: MetadataRoute.Sitemap = PLATFORMS.map((p) => ({
-    url: `${BASE_URL}/plateformes/${p.slug}`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
-
-  const serviceEntries: MetadataRoute.Sitemap = PLATFORMS.flatMap((p) =>
-    p.services.map((s) => ({
-      url: `${BASE_URL}/plateformes/${p.slug}/${s.slug}`,
+  for (const key of Object.keys(STATIC_ROUTES) as RouteKey[]) {
+    const frUrl = `${BASE_URL}${routeHref("fr", key)}`;
+    const enUrl = `${BASE_URL}${routeHref("en", key)}`;
+    entries.push({
+      url: frUrl,
       lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: s.highlight ? 0.8 : 0.7,
-    }))
-  );
+      priority: PRIORITIES[key] ?? 0.3,
+      alternates: { languages: { fr: frUrl, en: enUrl } },
+    });
+    entries.push({
+      url: enUrl,
+      lastModified: now,
+      priority: PRIORITIES[key] ?? 0.3,
+      alternates: { languages: { fr: frUrl, en: enUrl } },
+    });
+  }
 
-  return [...staticEntries, ...platformEntries, ...serviceEntries];
+  for (const platform of PLATFORMS) {
+    const frUrl = `${BASE_URL}${platformHref("fr", platform.slug)}`;
+    const enUrl = `${BASE_URL}${platformHref("en", platform.slug)}`;
+    entries.push({
+      url: frUrl,
+      lastModified: now,
+      priority: 0.8,
+      alternates: { languages: { fr: frUrl, en: enUrl } },
+    });
+    entries.push({
+      url: enUrl,
+      lastModified: now,
+      priority: 0.8,
+      alternates: { languages: { fr: frUrl, en: enUrl } },
+    });
+
+    for (const service of platform.services) {
+      const frServiceUrl = `${BASE_URL}${serviceHref("fr", platform.slug, service.slug, service.slugEn)}`;
+      const enServiceUrl = `${BASE_URL}${serviceHref("en", platform.slug, service.slug, service.slugEn)}`;
+      entries.push({
+        url: frServiceUrl,
+        lastModified: now,
+        priority: service.highlight ? 0.8 : 0.7,
+        alternates: { languages: { fr: frServiceUrl, en: enServiceUrl } },
+      });
+      entries.push({
+        url: enServiceUrl,
+        lastModified: now,
+        priority: service.highlight ? 0.8 : 0.7,
+        alternates: { languages: { fr: frServiceUrl, en: enServiceUrl } },
+      });
+    }
+  }
+
+  return entries;
 }
