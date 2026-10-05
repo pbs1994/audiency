@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #0e1226;
+  --navy-2: #171c38;
+  --navy-line: rgba(243, 244, 250, 0.1);
+  --surface: #ffffff;
+  --surface-soft: #f6f6fb;
+  --border: #e7e7f1;
+  --text: #15152a;
+  --text-muted: #65657d;
+  --on-navy: #f2f2f8;
+  --on-navy-muted: #9494ad;
+
+  --teal: #14b8a6;
+  --violet: #7c4dff;
+  --rose: #f43f8d;
+  --orange: #f97316;
+  --green: #16a34a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-navy-line: var(--navy-line);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-on-navy: var(--on-navy);
+  --color-on-navy-muted: var(--on-navy-muted);
+
+  --color-teal: var(--teal);
+  --color-violet: var(--violet);
+  --color-rose: var(--rose);
+  --color-orange: var(--orange);
+  --color-green: var(--green);
+
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.gradient-brand {
+  background-image: linear-gradient(135deg, var(--teal), var(--violet) 55%, var(--rose));
+}
+
+.gradient-brand-text {
+  background-image: linear-gradient(90deg, var(--violet), var(--rose));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-pulse-dot {
+    animation: none !important;
+  }
 }
