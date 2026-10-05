@@ -1,35 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
+import { parsePrice, formatPrice, formatQty } from "@/lib/price";
+import { useCart } from "@/lib/cart-context";
 
 const MULTIPLIERS = [1, 2, 5, 10, 20, 50];
 const DISCOUNTS = [0, 5, 12, 20, 30, 38];
-
-function parsePrice(price: string): number {
-  return parseFloat(price.replace(/[^\d,]/g, "").replace(",", "."));
-}
-
-function formatPrice(n: number): string {
-  return `${n.toFixed(2).replace(".", ",")} €`;
-}
-
-function formatQty(n: number): string {
-  if (n < 1000) return String(n);
-  const k = n / 1000;
-  return (Number.isInteger(k) ? String(k) : k.toFixed(1).replace(".", ",")) + "K";
-}
 
 export default function QuantityBuilder({
   basePrice,
   baseQty,
   unit,
+  logoName,
+  serviceName,
+  platformName,
+  idPrefix,
 }: {
   basePrice: string;
   baseQty: number;
   unit: string;
+  logoName: string;
+  serviceName: string;
+  platformName: string;
+  idPrefix: string;
 }) {
+  const router = useRouter();
+  const { addItem } = useCart();
   const [index, setIndex] = useState(2);
   const [username, setUsername] = useState("");
   const [checked, setChecked] = useState(false);
@@ -46,6 +44,17 @@ export default function QuantityBuilder({
 
   const selected = tiers[index];
   const perBase = selected.final / MULTIPLIERS[index];
+
+  const handleAddToCart = () => {
+    addItem({
+      id: `${idPrefix}:${selected.qty}:${Date.now()}`,
+      logoName,
+      name: `${serviceName} ${platformName}`,
+      detail: `${formatQty(selected.qty)} ${unit}`,
+      priceValue: selected.final,
+    });
+    router.push("/panier");
+  };
 
   return (
     <div className="rounded-2xl border border-border bg-surface-soft p-6">
@@ -139,12 +148,13 @@ export default function QuantityBuilder({
         )}
       </div>
 
-      <Link
-        href="/panier"
+      <button
+        type="button"
+        onClick={handleAddToCart}
         className="mt-5 flex w-full items-center justify-center rounded-full gradient-brand py-3.5 text-sm font-bold text-white"
       >
         Ajouter au panier · {formatPrice(selected.final)}
-      </Link>
+      </button>
     </div>
   );
 }

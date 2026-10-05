@@ -5,6 +5,7 @@ import TopBar from "@/components/TopBar";
 import TickerTape from "@/components/TickerTape";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { CartProvider } from "@/lib/cart-context";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,11 +22,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-surface text-text font-body">
-        <TopBar />
-        <TickerTape />
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <CartProvider>
+          <TopBar />
+          <TickerTape />
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </CartProvider>
       </body>
     </html>
   );

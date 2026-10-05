@@ -23,6 +23,7 @@ import { getService, allServiceParams, type PlatformData, type ServiceItem } fro
 import PlatformLogo from "@/components/PlatformLogo";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import QuantityBuilder from "./QuantityBuilder";
+import AddToCartButton from "./AddToCartButton";
 
 export function generateStaticParams() {
   return allServiceParams();
@@ -151,7 +152,15 @@ export default async function ServicePage(props: PageProps<"/plateformes/[slug]/
       <section className="bg-surface">
         <div className="mx-auto max-w-4xl px-5 py-14 sm:px-8">
           {canBuildQuantity ? (
-            <QuantityBuilder basePrice={service.price} baseQty={service.baseQty!} unit={service.unit!} />
+            <QuantityBuilder
+              basePrice={service.price}
+              baseQty={service.baseQty!}
+              unit={service.unit!}
+              logoName={platform.logoName}
+              serviceName={service.name}
+              platformName={platform.name}
+              idPrefix={`${platform.slug}:${service.slug}`}
+            />
           ) : (
             <div className="rounded-2xl border-2 border-violet/30 bg-surface-soft p-6">
               <div className="flex flex-wrap items-center justify-between gap-4">
@@ -164,12 +173,13 @@ export default async function ServicePage(props: PageProps<"/plateformes/[slug]/
                   <p className="text-xs text-text-muted">{service.sold}</p>
                 </div>
               </div>
-              <Link
-                href="/panier"
-                className="mt-5 flex w-full items-center justify-center rounded-full gradient-brand py-3.5 text-sm font-bold text-white"
-              >
-                Ajouter au panier · {service.price}
-              </Link>
+              <AddToCartButton
+                logoName={platform.logoName}
+                name={`${service.name} ${platform.name}`}
+                detail={service.detail}
+                price={service.price}
+                idPrefix={`${platform.slug}:${service.slug}`}
+              />
             </div>
           )}
         </div>

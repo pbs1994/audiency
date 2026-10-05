@@ -1,22 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import PlatformLogo, { hasPlatformLogo } from "./PlatformLogo";
+import { getPlatform } from "@/lib/platforms";
 
 const PLATFORMS = [
-  "Instagram",
-  "TikTok",
-  "YouTube",
-  "Facebook",
-  "X / Twitter",
-  "Snapchat",
-  "Spotify",
-  "Telegram",
-  "WhatsApp",
+  { label: "Instagram", slug: "instagram" },
+  { label: "TikTok", slug: "tiktok" },
+  { label: "YouTube", slug: "youtube" },
+  { label: "Facebook", slug: "facebook" },
+  { label: "X / Twitter", slug: "x" },
+  { label: "Snapchat", slug: "snapchat" },
+  { label: "Spotify", slug: "spotify" },
+  { label: "Telegram", slug: "telegram" },
+  { label: "WhatsApp", slug: "whatsapp" },
 ];
 
 export default function Hero() {
-  const [active, setActive] = useState("Instagram");
+  const [activeSlug, setActiveSlug] = useState("instagram");
+  const activePlatform = getPlatform(activeSlug)!;
+  const bestValue = activePlatform.services.find((s) => s.highlight) ?? activePlatform.services[0];
 
   return (
     <section id="top" className="border-b border-border bg-surface-soft">
@@ -39,44 +43,45 @@ export default function Hero() {
         <div className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-2">
           {PLATFORMS.map((p) => (
             <button
-              key={p}
+              key={p.slug}
               type="button"
-              onClick={() => setActive(p)}
+              onClick={() => setActiveSlug(p.slug)}
               className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                active === p
+                activeSlug === p.slug
                   ? "gradient-brand text-white shadow-sm"
                   : "border border-border bg-surface text-text-muted hover:border-violet/40 hover:text-text"
               }`}
             >
-              {hasPlatformLogo(p) && (
-                <PlatformLogo name={p} size={16} className="rounded-sm" />
+              {hasPlatformLogo(p.label) && (
+                <PlatformLogo name={p.label} size={16} className="rounded-sm" />
               )}
-              {p}
+              {p.label}
             </button>
           ))}
         </div>
 
-        <div className="mx-auto mt-10 max-w-xl rounded-2xl border-2 border-violet/30 bg-surface p-6 text-left shadow-sm">
+        <Link
+          href={`/plateformes/${activePlatform.slug}/${bestValue.slug}`}
+          className="mx-auto mt-10 block max-w-xl rounded-2xl border-2 border-violet/30 bg-surface p-6 text-left shadow-sm transition-colors hover:border-violet/50"
+        >
           <span className="inline-block rounded-full bg-gradient-to-r from-violet to-rose px-3 py-1 text-xs font-bold tracking-wide text-white">
             MEILLEUR PACK
           </span>
           <div className="mt-3 flex items-center justify-between gap-4">
             <div>
               <p className="text-xl font-bold text-text">
-                Vues <span className="text-violet">+</span> Likes
+                {bestValue.name} <span className="text-violet">·</span> {activePlatform.name}
               </p>
-              <p className="text-sm text-text-muted">
-                Vues et likes Instagram · 2 services en une commande
-              </p>
+              <p className="text-sm text-text-muted">{bestValue.detail}</p>
             </div>
             <div className="shrink-0 text-right">
-              <p className="text-2xl font-extrabold gradient-brand-text">1,59 €</p>
+              <p className="text-2xl font-extrabold gradient-brand-text">{bestValue.price}</p>
               <span className="mt-1 inline-block rounded-full bg-orange/10 px-2.5 py-1 text-xs font-semibold text-orange">
-                141K+ vendues
+                {bestValue.sold}
               </span>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     </section>
   );

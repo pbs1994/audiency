@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, ShoppingCart, User, Globe, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ShoppingCart, User, ChevronDown, ChevronRight } from "lucide-react";
 import PlatformLogo from "./PlatformLogo";
+import LocaleSwitcher from "./LocaleSwitcher";
 import { getPlatform, PLATFORMS } from "@/lib/platforms";
+import { useCart } from "@/lib/cart-context";
 
 const MAIN_SLUGS = ["tiktok", "instagram", "youtube", "facebook"];
 const MORE_SLUGS = ["x", "snapchat", "telegram", "whatsapp", "spotify"];
@@ -112,6 +114,7 @@ function MoreDropdown() {
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const { items } = useCart();
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
@@ -177,14 +180,14 @@ export default function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <span className="flex items-center gap-1 text-sm text-text-muted">
-            <Globe size={15} /> FR / EUR
-          </span>
+          <LocaleSwitcher />
           <Link href="/panier" className="relative text-text-muted hover:text-text" aria-label="Panier">
             <ShoppingCart size={18} />
-            <span className="absolute -right-1.5 -top-1.5 grid h-4 w-4 place-items-center rounded-full bg-rose text-[10px] font-semibold text-white">
-              1
-            </span>
+            {items.length > 0 && (
+              <span className="absolute -right-1.5 -top-1.5 grid h-4 w-4 place-items-center rounded-full bg-rose text-[10px] font-semibold text-white">
+                {items.length}
+              </span>
+            )}
           </Link>
           <Link href="/connexion" className="flex items-center gap-1.5 text-sm font-medium text-text hover:text-violet">
             <User size={16} /> Connexion
