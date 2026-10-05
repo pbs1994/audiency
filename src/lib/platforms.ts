@@ -243,15 +243,15 @@ export const PLATFORMS: PlatformData[] = [
     logoName: "Threads",
     name: "Threads",
     nameEn: "Threads",
-    tagline: "Abonnés, likes et vues réels",
-    taglineEn: "Real followers, likes and views",
+    tagline: "Abonnés, likes et partages réels",
+    taglineEn: "Real followers, likes and shares",
     description:
       "Développez votre audience sur Threads avec des abonnés et un engagement provenant de comptes réels.",
     descriptionEn: "Grow your audience on Threads with followers and engagement from real accounts.",
     services: [
-      { slug: "acheter-abonnes-threads", slugEn: "buy-threads-followers", title: "Acheter des Abonnés Threads", titleEn: "Buy Threads Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 2.99, sold: "6K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
-      { slug: "acheter-likes-threads", slugEn: "buy-threads-likes", title: "Acheter des Likes Threads", titleEn: "Buy Threads Likes", name: "Likes", nameEn: "Likes", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 1.79, sold: "14K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
-      { slug: "acheter-vues-threads", slugEn: "buy-threads-views", title: "Acheter des Vues Threads", titleEn: "Buy Threads Views", name: "Vues", nameEn: "Views", detail: "Pour vos publications", detailEn: "For your posts", priceEUR: 1.49, sold: "10K+", baseQty: 1000, unit: "vues", unitEn: "views" },
+      { slug: "acheter-abonnes-threads", slugEn: "buy-threads-followers", title: "Acheter des Abonnés Threads", titleEn: "Buy Threads Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 4.49, sold: "6K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
+      { slug: "acheter-likes-threads", slugEn: "buy-threads-likes", title: "Acheter des Likes Threads", titleEn: "Buy Threads Likes", name: "Likes", nameEn: "Likes", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 2.99, sold: "14K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
+      { slug: "acheter-partages-threads", slugEn: "buy-threads-shares", title: "Acheter des Partages Threads", titleEn: "Buy Threads Shares", name: "Partages", nameEn: "Shares", detail: "Reposts sur vos publications", detailEn: "Reposts on your posts", priceEUR: 2.49, sold: "10K+", baseQty: 1000, unit: "partages", unitEn: "shares" },
     ],
   },
 ];
