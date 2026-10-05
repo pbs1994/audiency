@@ -11,6 +11,12 @@ import { routeHref, type Locale } from "@/lib/i18n";
 const MULTIPLIERS = [1, 2, 5, 10, 20, 50];
 const DISCOUNTS = [0, 5, 12, 20, 30, 38];
 
+type Quality = "standard" | "premium";
+type Gender = "all" | "female" | "male";
+
+const QUALITY_MULTIPLIER: Record<Quality, number> = { standard: 1, premium: 1.45 };
+const GENDER_MULTIPLIER: Record<Gender, number> = { all: 1, female: 1.2, male: 1.2 };
+
 const T = {
   fr: {
     chooseQty: "Choisissez la quantité",
@@ -22,6 +28,15 @@ const T = {
     verify: "Vérifier",
     validFormat: "Format valide",
     addToCart: "Ajouter au panier",
+    quality: "Qualité",
+    qualityStandard: "Standard",
+    qualityStandardBody: "Comptes actifs, origine mondiale",
+    qualityPremium: "Premium 🇫🇷",
+    qualityPremiumBody: "Profils français vérifiés, rétention supérieure",
+    gender: "Profil",
+    genderAll: "Tous",
+    genderFemale: "Femmes",
+    genderMale: "Hommes",
   },
   en: {
     chooseQty: "Choose your quantity",
@@ -33,6 +48,15 @@ const T = {
     verify: "Verify",
     validFormat: "Valid format",
     addToCart: "Add to cart",
+    quality: "Quality",
+    qualityStandard: "Standard",
+    qualityStandardBody: "Active accounts, worldwide origin",
+    qualityPremium: "Premium 🇫🇷",
+    qualityPremiumBody: "Verified French profiles, higher retention",
+    gender: "Profile",
+    genderAll: "Any",
+    genderFemale: "Female",
+    genderMale: "Male",
   },
 };
 
@@ -45,6 +69,8 @@ export default function QuantityBuilder({
   serviceName,
   platformName,
   idPrefix,
+  followerType = false,
+  genderOption = false,
 }: {
   locale: Locale;
   basePriceEUR: number;
@@ -54,18 +80,25 @@ export default function QuantityBuilder({
   serviceName: string;
   platformName: string;
   idPrefix: string;
+  followerType?: boolean;
+  genderOption?: boolean;
 }) {
   const t = T[locale];
   const router = useRouter();
   const { addItem } = useCart();
   const { format } = useCurrency();
   const [index, setIndex] = useState(2);
+  const [quality, setQuality] = useState<Quality>("standard");
+  const [gender, setGender] = useState<Gender>("all");
   const [username, setUsername] = useState("");
   const [checked, setChecked] = useState(false);
 
+  const optionMultiplier =
+    (followerType ? QUALITY_MULTIPLIER[quality] : 1) * (genderOption ? GENDER_MULTIPLIER[gender] : 1);
+
   const tiers = MULTIPLIERS.map((m, i) => {
     const qty = baseQty * m;
-    const linear = basePriceEUR * m;
+    const linear = basePriceEUR * m * optionMultiplier;
     const discount = DISCOUNTS[i];
     const final = linear * (1 - discount / 100);
     return { qty, linear, discount, final };
@@ -74,12 +107,28 @@ export default function QuantityBuilder({
   const selected = tiers[index];
   const perBase = selected.final / MULTIPLIERS[index];
 
+  const qualityLabel = followerType
+    ? quality === "premium"
+      ? t.qualityPremium
+      : t.qualityStandard
+    : null;
+  const genderLabel = genderOption
+    ? gender === "female"
+      ? t.genderFemale
+      : gender === "male"
+        ? t.genderMale
+        : t.genderAll
+    : null;
+  const optionSuffix = [qualityLabel, genderLabel && genderLabel !== t.genderAll ? genderLabel : null]
+    .filter(Boolean)
+    .join(" · ");
+
   const handleAddToCart = () => {
     addItem({
-      id: createCartItemId(`${idPrefix}:${selected.qty}`),
+      id: createCartItemId(`${idPrefix}:${selected.qty}:${quality}:${gender}`),
       logoName,
       name: `${serviceName} ${platformName}`,
-      detail: `${formatQty(selected.qty)} ${unit}`,
+      detail: `${formatQty(selected.qty)} ${unit}${optionSuffix ? ` · ${optionSuffix}` : ""}`,
       priceValue: selected.final,
     });
     router.push(routeHref(locale, "cart"));
@@ -125,13 +174,68 @@ export default function QuantityBuilder({
         ))}
       </div>
 
+      {followerType && (
+        <div className="mt-5">
+          <p className="text-sm font-semibold text-text">{t.quality}</p>
+          <div className="mt-2 grid gap-2 sm:grid-cols-2">
+            {(["standard", "premium"] as Quality[]).map((q) => (
+              <button
+                key={q}
+                type="button"
+                onClick={() => setQuality(q)}
+                className={`rounded-xl border px-3 py-2.5 text-left transition-colors ${
+                  quality === q
+                    ? "border-violet bg-violet/5"
+                    : "border-border bg-surface hover:border-violet/40"
+                }`}
+              >
+                <span className="flex items-center justify-between text-sm font-semibold text-text">
+                  {q === "premium" ? t.qualityPremium : t.qualityStandard}
+                  {q === "premium" && (
+                    <span className="text-xs font-medium text-orange">
+                      +{Math.round((QUALITY_MULTIPLIER.premium - 1) * 100)}%
+                    </span>
+                  )}
+                </span>
+                <span className="mt-0.5 block text-xs text-text-muted">
+                  {q === "premium" ? t.qualityPremiumBody : t.qualityStandardBody}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {genderOption && (
+        <div className="mt-5">
+          <p className="text-sm font-semibold text-text">{t.gender}</p>
+          <div className="mt-2 flex gap-2">
+            {(["all", "female", "male"] as Gender[]).map((g) => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => setGender(g)}
+                className={`flex-1 rounded-full border px-3 py-2 text-sm font-medium transition-colors ${
+                  gender === g
+                    ? "border-violet bg-violet text-white"
+                    : "border-border bg-surface text-text-muted hover:border-violet/40"
+                }`}
+              >
+                {g === "all" ? t.genderAll : g === "female" ? t.genderFemale : t.genderMale}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mt-5 rounded-xl border border-border bg-surface p-5">
         <div className="flex items-baseline justify-between">
           <span className="text-sm text-text-muted">
             {formatQty(selected.qty)} {unit}
+            {optionSuffix && <span className="text-text-muted"> · {optionSuffix}</span>}
           </span>
           <div className="text-right">
-            {selected.discount > 0 && (
+            {(selected.discount > 0 || optionMultiplier > 1) && (
               <span className="mr-2 text-sm text-text-muted line-through">{format(selected.linear)}</span>
             )}
             <span className="text-2xl font-extrabold gradient-brand-text">{format(selected.final)}</span>

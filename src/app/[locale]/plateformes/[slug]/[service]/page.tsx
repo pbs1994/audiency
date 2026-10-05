@@ -81,7 +81,7 @@ const T = {
     reviews: (n: number) => `(${n} avis)`,
     howItWorks: "Comment ça marche",
     steps: [
-      { icon: Search, title: "Choisissez la quantité", body: (metric: string) => `Sélectionnez le volume de ${metric} adapté à vos objectifs.` },
+      { icon: Search, title: "Composez votre commande", body: (metric: string) => `Choisissez la quantité et les options de ${metric} adaptées à vos objectifs.` },
       { icon: UserCheck, title: "Indiquez votre pseudo", body: () => "Aucun mot de passe. Juste votre nom d’utilisateur ou l’URL de votre publication." },
       { icon: Rocket, title: "Recevez votre commande", body: () => "La livraison démarre en quelques minutes et se poursuit progressivement." },
     ],
@@ -143,7 +143,7 @@ const T = {
     reviews: (n: number) => `(${n} reviews)`,
     howItWorks: "How it works",
     steps: [
-      { icon: Search, title: "Choose your quantity", body: (metric: string) => `Pick the volume of ${metric} that fits your goals.` },
+      { icon: Search, title: "Build your order", body: (metric: string) => `Pick the quantity and options for ${metric} that fit your goals.` },
       { icon: UserCheck, title: "Enter your username", body: () => "No password. Just your username or your post URL." },
       { icon: Rocket, title: "Receive your order", body: () => "Delivery starts within minutes and continues gradually." },
     ],
@@ -289,6 +289,8 @@ export default async function ServicePage(props: PageProps<"/[locale]/plateforme
               serviceName={serviceName}
               platformName={platformName}
               idPrefix={`${platform.slug}:${service.slug}`}
+              followerType={service.followerType}
+              genderOption={service.genderOption}
             />
           ) : (
             <div className="rounded-2xl border-2 border-violet/30 bg-surface-soft p-6">

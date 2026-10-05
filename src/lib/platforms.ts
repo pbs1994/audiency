@@ -14,6 +14,10 @@ export type ServiceItem = {
   baseQty?: number;
   unit?: string;
   unitEn?: string;
+  /** People-counting service (followers/members/subscribers) — shows the quality tier picker. */
+  followerType?: boolean;
+  /** Shows the gender picker (Instagram followers only). */
+  genderOption?: boolean;
 };
 
 export type PlatformData = {
@@ -42,7 +46,7 @@ export const PLATFORMS: PlatformData[] = [
       "Grow your Instagram account with real, active followers, views and likes. Gradual delivery, no password required.",
     services: [
       { slug: "pack-vues-likes-instagram", slugEn: "instagram-views-likes-pack", title: "Pack Vues + Likes Instagram", titleEn: "Instagram Views + Likes Pack", name: "Vues + Likes", nameEn: "Views + Likes", detail: "2 services en une seule commande", detailEn: "2 services in one order", priceEUR: 2.99, sold: "141K+", highlight: true },
-      { slug: "acheter-abonnes-instagram", slugEn: "buy-instagram-followers", title: "Acheter des Abonnés Instagram", titleEn: "Buy Instagram Followers", name: "Abonnés", nameEn: "Followers", detail: "Livraison progressive, rétention garantie", detailEn: "Gradual delivery, retention guaranteed", priceEUR: 2.99, sold: "309K+", baseQty: 100, unit: "abonnés", unitEn: "followers" },
+      { slug: "acheter-abonnes-instagram", slugEn: "buy-instagram-followers", title: "Acheter des Abonnés Instagram", titleEn: "Buy Instagram Followers", name: "Abonnés", nameEn: "Followers", detail: "Livraison progressive, rétention garantie", detailEn: "Gradual delivery, retention guaranteed", priceEUR: 2.99, sold: "309K+", baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true, genderOption: true },
       { slug: "acheter-vues-instagram", slugEn: "buy-instagram-views", title: "Acheter des Vues Instagram", titleEn: "Buy Instagram Views", name: "Vues", nameEn: "Views", detail: "Pour publications et reels", detailEn: "For posts and reels", priceEUR: 2.49, sold: "217K+", baseQty: 1000, unit: "vues", unitEn: "views" },
       { slug: "acheter-likes-instagram", slugEn: "buy-instagram-likes", title: "Acheter des Likes Instagram", titleEn: "Buy Instagram Likes", name: "Likes", nameEn: "Likes", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 1.99, sold: "111K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
       { slug: "acheter-likes-premium-instagram", slugEn: "buy-instagram-premium-likes", title: "Acheter des Likes Premium Instagram", titleEn: "Buy Instagram Premium Likes", name: "Likes Premium", nameEn: "Premium Likes", detail: "Comptes vérifiés et actifs", detailEn: "Verified, active accounts", priceEUR: 2.99, sold: "109K+", baseQty: 1000, unit: "likes premium", unitEn: "premium likes" },
@@ -62,7 +66,7 @@ export const PLATFORMS: PlatformData[] = [
       "Give your TikTok videos the boost they deserve with real engagement and instant delivery.",
     services: [
       { slug: "pack-vues-likes-partages-tiktok", slugEn: "tiktok-views-likes-shares-pack", title: "Pack Vues + Likes + Partages TikTok", titleEn: "TikTok Views + Likes + Shares Pack", name: "Vues + Likes + Partages", nameEn: "Views + Likes + Shares", detail: "Pack complet pour un décollage rapide", detailEn: "Complete pack for a fast takeoff", priceEUR: 2.49, sold: "98K+", highlight: true },
-      { slug: "acheter-abonnes-tiktok", slugEn: "buy-tiktok-followers", title: "Acheter des Abonnés TikTok", titleEn: "Buy TikTok Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "176K+", baseQty: 100, unit: "abonnés", unitEn: "followers" },
+      { slug: "acheter-abonnes-tiktok", slugEn: "buy-tiktok-followers", title: "Acheter des Abonnés TikTok", titleEn: "Buy TikTok Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "176K+", baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
       { slug: "acheter-vues-tiktok", slugEn: "buy-tiktok-views", title: "Acheter des Vues TikTok", titleEn: "Buy TikTok Views", name: "Vues", nameEn: "Views", detail: "Pour accélérer la portée de vos vidéos", detailEn: "Boost your videos' reach", priceEUR: 1.29, sold: "402K+", baseQty: 1000, unit: "vues", unitEn: "views" },
       { slug: "acheter-likes-tiktok", slugEn: "buy-tiktok-likes", title: "Acheter des Likes TikTok", titleEn: "Buy TikTok Likes", name: "Likes", nameEn: "Likes", detail: "Engagement sur vos vidéos", detailEn: "Engagement on your videos", priceEUR: 1.79, sold: "133K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
       { slug: "acheter-partages-tiktok", slugEn: "buy-tiktok-shares", title: "Acheter des Partages TikTok", titleEn: "Buy TikTok Shares", name: "Partages", nameEn: "Shares", detail: "Augmentez la diffusion de vos vidéos", detailEn: "Increase your videos' spread", priceEUR: 1.99, sold: "54K+", baseQty: 100, unit: "partages", unitEn: "shares" },
@@ -82,7 +86,7 @@ export const PLATFORMS: PlatformData[] = [
       "Grow your YouTube channel with real subscribers and views, for measurable, lasting growth.",
     services: [
       { slug: "pack-vues-likes-commentaires-youtube", slugEn: "youtube-views-likes-comments-pack", title: "Pack Vues + Likes + Commentaires YouTube", titleEn: "YouTube Views + Likes + Comments Pack", name: "Vues + Likes + Commentaires", nameEn: "Views + Likes + Comments", detail: "Pack complet pour vos nouvelles vidéos", detailEn: "Complete pack for your new videos", priceEUR: 4.49, sold: "41K+", highlight: true },
-      { slug: "acheter-abonnes-youtube", slugEn: "buy-youtube-subscribers", title: "Acheter des Abonnés YouTube", titleEn: "Buy YouTube Subscribers", name: "Abonnés", nameEn: "Subscribers", detail: "Croissance progressive de la chaîne", detailEn: "Gradual channel growth", priceEUR: 4.99, sold: "67K+", baseQty: 100, unit: "abonnés", unitEn: "subscribers" },
+      { slug: "acheter-abonnes-youtube", slugEn: "buy-youtube-subscribers", title: "Acheter des Abonnés YouTube", titleEn: "Buy YouTube Subscribers", name: "Abonnés", nameEn: "Subscribers", detail: "Croissance progressive de la chaîne", detailEn: "Gradual channel growth", priceEUR: 4.99, sold: "67K+", baseQty: 100, unit: "abonnés", unitEn: "subscribers", followerType: true },
       { slug: "acheter-vues-youtube", slugEn: "buy-youtube-views", title: "Acheter des Vues YouTube", titleEn: "Buy YouTube Views", name: "Vues", nameEn: "Views", detail: "Pour vos vidéos et shorts", detailEn: "For your videos and shorts", priceEUR: 2.99, sold: "189K+", baseQty: 1000, unit: "vues", unitEn: "views" },
       { slug: "acheter-likes-youtube", slugEn: "buy-youtube-likes", title: "Acheter des Likes YouTube", titleEn: "Buy YouTube Likes", name: "Likes", nameEn: "Likes", detail: "Engagement sur vos vidéos", detailEn: "Engagement on your videos", priceEUR: 2.99, sold: "48K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
       { slug: "acheter-commentaires-personnalises-youtube", slugEn: "buy-youtube-custom-comments", title: "Acheter des Commentaires Personnalisés YouTube", titleEn: "Buy YouTube Custom Comments", name: "Commentaires personnalisés", nameEn: "Custom Comments", detail: "Commentaires pertinents et rédigés", detailEn: "Relevant, hand-written comments", priceEUR: 4.99, sold: "22K+", baseQty: 10, unit: "commentaires", unitEn: "comments" },
@@ -100,11 +104,11 @@ export const PLATFORMS: PlatformData[] = [
       "Renforcez la présence de votre page ou groupe Facebook avec un engagement réel et durable.",
     descriptionEn: "Strengthen your Facebook page or group with real, lasting engagement.",
     services: [
-      { slug: "acheter-abonnes-page-facebook", slugEn: "buy-facebook-page-followers", title: "Acheter des Abonnés Page Facebook", titleEn: "Buy Facebook Page Followers", name: "Abonnés Page", nameEn: "Page Followers", detail: "Croissance organique simulée", detailEn: "Simulated organic growth", priceEUR: 2.79, sold: "88K+", highlight: true },
+      { slug: "acheter-abonnes-page-facebook", slugEn: "buy-facebook-page-followers", title: "Acheter des Abonnés Page Facebook", titleEn: "Buy Facebook Page Followers", name: "Abonnés Page", nameEn: "Page Followers", detail: "Croissance organique simulée", detailEn: "Simulated organic growth", priceEUR: 2.79, sold: "88K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
       { slug: "acheter-likes-page-facebook", slugEn: "buy-facebook-page-likes", title: "Acheter des Likes Page Facebook", titleEn: "Buy Facebook Page Likes", name: "Likes Page", nameEn: "Page Likes", detail: "Renforce la crédibilité de votre page", detailEn: "Boosts your page's credibility", priceEUR: 2.29, sold: "102K+", baseQty: 100, unit: "likes", unitEn: "likes" },
       { slug: "acheter-likes-publication-facebook", slugEn: "buy-facebook-post-likes", title: "Acheter des Likes Publication Facebook", titleEn: "Buy Facebook Post Likes", name: "Likes Publication", nameEn: "Post Likes", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 1.79, sold: "134K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
       { slug: "acheter-partages-facebook", slugEn: "buy-facebook-shares", title: "Acheter des Partages Facebook", titleEn: "Buy Facebook Shares", name: "Partages", nameEn: "Shares", detail: "Augmentez la portée de vos posts", detailEn: "Increase your posts' reach", priceEUR: 1.79, sold: "36K+", baseQty: 100, unit: "partages", unitEn: "shares" },
-      { slug: "acheter-membres-de-groupe-facebook", slugEn: "buy-facebook-group-members", title: "Acheter des Membres de Groupe Facebook", titleEn: "Buy Facebook Group Members", name: "Membres de groupe", nameEn: "Group Members", detail: "Pour développer votre communauté", detailEn: "Grow your community", priceEUR: 2.99, sold: "21K+", baseQty: 100, unit: "membres", unitEn: "members" },
+      { slug: "acheter-membres-de-groupe-facebook", slugEn: "buy-facebook-group-members", title: "Acheter des Membres de Groupe Facebook", titleEn: "Buy Facebook Group Members", name: "Membres de groupe", nameEn: "Group Members", detail: "Pour développer votre communauté", detailEn: "Grow your community", priceEUR: 2.99, sold: "21K+", baseQty: 100, unit: "membres", unitEn: "members", followerType: true },
     ],
   },
   {
@@ -118,7 +122,7 @@ export const PLATFORMS: PlatformData[] = [
       "Développez votre audience sur X avec des abonnés et un engagement provenant de comptes réels.",
     descriptionEn: "Grow your audience on X with followers and engagement from real accounts.",
     services: [
-      { slug: "acheter-abonnes-x", slugEn: "buy-x-followers", title: "Acheter des Abonnés X", titleEn: "Buy X Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.29, sold: "57K+", highlight: true },
+      { slug: "acheter-abonnes-x", slugEn: "buy-x-followers", title: "Acheter des Abonnés X", titleEn: "Buy X Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.29, sold: "57K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
       { slug: "acheter-likes-x", slugEn: "buy-x-likes", title: "Acheter des Likes X", titleEn: "Buy X Likes", name: "Likes", nameEn: "Likes", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 1.69, sold: "143K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
       { slug: "acheter-retweets-x", slugEn: "buy-x-retweets", title: "Acheter des Retweets X", titleEn: "Buy X Retweets", name: "Retweets", nameEn: "Retweets", detail: "Augmentez la diffusion de vos posts", detailEn: "Increase your posts' spread", priceEUR: 1.69, sold: "62K+", baseQty: 100, unit: "retweets", unitEn: "retweets" },
       { slug: "acheter-vues-x", slugEn: "buy-x-views", title: "Acheter des Vues X", titleEn: "Buy X Views", name: "Vues", nameEn: "Views", detail: "Pour vos publications et vidéos", detailEn: "For your posts and videos", priceEUR: 1.29, sold: "201K+", baseQty: 1000, unit: "vues", unitEn: "views" },
@@ -134,8 +138,8 @@ export const PLATFORMS: PlatformData[] = [
     description: "Boostez la visibilité de vos stories et de votre profil Snapchat.",
     descriptionEn: "Boost the visibility of your stories and your Snapchat profile.",
     services: [
-      { slug: "acheter-vues-story-snapchat", slugEn: "buy-snapchat-story-views", title: "Acheter des Vues Story Snapchat", titleEn: "Buy Snapchat Story Views", name: "Vues Story", nameEn: "Story Views", detail: "Boost de visibilité instantané", detailEn: "Instant visibility boost", priceEUR: 1.99, sold: "44K+", highlight: true },
-      { slug: "acheter-abonnes-snapchat", slugEn: "buy-snapchat-followers", title: "Acheter des Abonnés Snapchat", titleEn: "Buy Snapchat Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "19K+", baseQty: 100, unit: "abonnés", unitEn: "followers" },
+      { slug: "acheter-vues-story-snapchat", slugEn: "buy-snapchat-story-views", title: "Acheter des Vues Story Snapchat", titleEn: "Buy Snapchat Story Views", name: "Vues Story", nameEn: "Story Views", detail: "Boost de visibilité instantané", detailEn: "Instant visibility boost", priceEUR: 1.99, sold: "44K+", highlight: true, baseQty: 1000, unit: "vues", unitEn: "views" },
+      { slug: "acheter-abonnes-snapchat", slugEn: "buy-snapchat-followers", title: "Acheter des Abonnés Snapchat", titleEn: "Buy Snapchat Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "19K+", baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
       { slug: "booster-score-snapchat", slugEn: "boost-snapchat-score", title: "Booster son Score Snapchat", titleEn: "Boost Your Snapchat Score", name: "Score boost", nameEn: "Score Boost", detail: "Augmentation progressive du score", detailEn: "Gradual score increase", priceEUR: 2.49, sold: "8K+" },
     ],
   },
@@ -150,9 +154,9 @@ export const PLATFORMS: PlatformData[] = [
       "Donnez à votre musique la portée qu’elle mérite avec des écoutes et des abonnés réels sur Spotify.",
     descriptionEn: "Give your music the reach it deserves with real streams and followers on Spotify.",
     services: [
-      { slug: "acheter-ecoutes-spotify", slugEn: "buy-spotify-streams", title: "Acheter des Écoutes Spotify", titleEn: "Buy Spotify Streams", name: "Écoutes", nameEn: "Streams", detail: "Pour vos titres et albums", detailEn: "For your tracks and albums", priceEUR: 2.49, sold: "76K+", highlight: true },
-      { slug: "acheter-abonnes-playlist-spotify", slugEn: "buy-spotify-playlist-followers", title: "Acheter des Abonnés Playlist Spotify", titleEn: "Buy Spotify Playlist Followers", name: "Abonnés Playlist", nameEn: "Playlist Followers", detail: "Croissance de votre playlist", detailEn: "Grow your playlist", priceEUR: 2.99, sold: "31K+", baseQty: 100, unit: "abonnés", unitEn: "followers" },
-      { slug: "acheter-abonnes-profil-spotify", slugEn: "buy-spotify-profile-followers", title: "Acheter des Abonnés Profil Spotify", titleEn: "Buy Spotify Profile Followers", name: "Abonnés Profil", nameEn: "Profile Followers", detail: "Développez votre audience d’artiste", detailEn: "Grow your artist audience", priceEUR: 2.79, sold: "18K+", baseQty: 100, unit: "abonnés", unitEn: "followers" },
+      { slug: "acheter-ecoutes-spotify", slugEn: "buy-spotify-streams", title: "Acheter des Écoutes Spotify", titleEn: "Buy Spotify Streams", name: "Écoutes", nameEn: "Streams", detail: "Pour vos titres et albums", detailEn: "For your tracks and albums", priceEUR: 2.49, sold: "76K+", highlight: true, baseQty: 1000, unit: "écoutes", unitEn: "streams" },
+      { slug: "acheter-abonnes-playlist-spotify", slugEn: "buy-spotify-playlist-followers", title: "Acheter des Abonnés Playlist Spotify", titleEn: "Buy Spotify Playlist Followers", name: "Abonnés Playlist", nameEn: "Playlist Followers", detail: "Croissance de votre playlist", detailEn: "Grow your playlist", priceEUR: 2.99, sold: "31K+", baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
+      { slug: "acheter-abonnes-profil-spotify", slugEn: "buy-spotify-profile-followers", title: "Acheter des Abonnés Profil Spotify", titleEn: "Buy Spotify Profile Followers", name: "Abonnés Profil", nameEn: "Profile Followers", detail: "Développez votre audience d’artiste", detailEn: "Grow your artist audience", priceEUR: 2.79, sold: "18K+", baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
     ],
   },
   {
@@ -166,7 +170,7 @@ export const PLATFORMS: PlatformData[] = [
       "Développez votre canal ou groupe Telegram avec des membres réels et actifs.",
     descriptionEn: "Grow your Telegram channel or group with real, active members.",
     services: [
-      { slug: "acheter-membres-de-canal-telegram", slugEn: "buy-telegram-channel-members", title: "Acheter des Membres de Canal Telegram", titleEn: "Buy Telegram Channel Members", name: "Membres de canal", nameEn: "Channel Members", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 2.99, sold: "64K+", highlight: true },
+      { slug: "acheter-membres-de-canal-telegram", slugEn: "buy-telegram-channel-members", title: "Acheter des Membres de Canal Telegram", titleEn: "Buy Telegram Channel Members", name: "Membres de canal", nameEn: "Channel Members", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 2.99, sold: "64K+", highlight: true, baseQty: 100, unit: "membres", unitEn: "members", followerType: true },
       { slug: "acheter-vues-de-publication-telegram", slugEn: "buy-telegram-post-views", title: "Acheter des Vues de Publication Telegram", titleEn: "Buy Telegram Post Views", name: "Vues de publication", nameEn: "Post Views", detail: "Augmentez la portée de vos posts", detailEn: "Increase your posts' reach", priceEUR: 1.69, sold: "112K+", baseQty: 1000, unit: "vues", unitEn: "views" },
       { slug: "acheter-reactions-telegram", slugEn: "buy-telegram-reactions", title: "Acheter des Réactions Telegram", titleEn: "Buy Telegram Reactions", name: "Réactions", nameEn: "Reactions", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 1.29, sold: "47K+", baseQty: 100, unit: "réactions", unitEn: "reactions" },
     ],
@@ -182,7 +186,7 @@ export const PLATFORMS: PlatformData[] = [
       "Développez votre communauté WhatsApp avec des membres de groupe et des vues de statut réels.",
     descriptionEn: "Grow your WhatsApp community with real group members and status views.",
     services: [
-      { slug: "acheter-membres-de-groupe-whatsapp", slugEn: "buy-whatsapp-group-members", title: "Acheter des Membres de Groupe WhatsApp", titleEn: "Buy WhatsApp Group Members", name: "Membres de groupe", nameEn: "Group Members", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "12K+", highlight: true },
+      { slug: "acheter-membres-de-groupe-whatsapp", slugEn: "buy-whatsapp-group-members", title: "Acheter des Membres de Groupe WhatsApp", titleEn: "Buy WhatsApp Group Members", name: "Membres de groupe", nameEn: "Group Members", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "12K+", highlight: true, baseQty: 100, unit: "membres", unitEn: "members", followerType: true },
       { slug: "acheter-vues-de-statut-whatsapp", slugEn: "buy-whatsapp-status-views", title: "Acheter des Vues de Statut WhatsApp", titleEn: "Buy WhatsApp Status Views", name: "Vues de statut", nameEn: "Status Views", detail: "Augmentez la visibilité de vos statuts", detailEn: "Increase your status visibility", priceEUR: 1.99, sold: "9K+", baseQty: 100, unit: "vues", unitEn: "views" },
     ],
   },
