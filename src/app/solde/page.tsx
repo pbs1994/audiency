@@ -3,7 +3,7 @@ import { Gift } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
-  title: "Mon solde | Audiency",
+  title: "Mon solde | BoostInflu",
 };
 
 const HISTORY = [
@@ -15,7 +15,7 @@ const HISTORY = [
 export default function BalancePage() {
   return (
     <>
-      <PageHeader title="Mon solde" subtitle="Votre cashback Audiency, utilisable sur n’importe quelle commande." />
+      <PageHeader title="Mon solde" subtitle="Votre cashback BoostInflu, utilisable sur n’importe quelle commande." />
       <section className="bg-surface">
         <div className="mx-auto max-w-2xl px-5 py-16 sm:px-8">
           <div className="flex items-center justify-between rounded-2xl gradient-brand p-6 text-white">

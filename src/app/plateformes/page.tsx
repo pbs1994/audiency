@@ -5,8 +5,8 @@ import PlatformLogo from "@/components/PlatformLogo";
 import { PLATFORMS } from "@/lib/platforms";
 
 export const metadata: Metadata = {
-  title: "Toutes les plateformes | Audiency",
-  description: "Développez votre audience sur 9 réseaux sociaux avec Audiency.",
+  title: "Toutes les plateformes | BoostInflu",
+  description: "Développez votre audience sur 9 réseaux sociaux avec BoostInflu.",
 };
 
 export default function PlatformsIndexPage() {

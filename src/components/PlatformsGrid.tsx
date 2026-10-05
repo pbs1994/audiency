@@ -23,7 +23,7 @@ export default function PlatformsGrid() {
           Développez-vous sur <span className="gradient-brand-text">chaque plateforme</span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-text-muted">
-          Audiency prend en charge 9 réseaux sociaux avec un engagement réel
+          BoostInflu prend en charge 9 réseaux sociaux avec un engagement réel
           provenant de comptes authentiques.
         </p>
 

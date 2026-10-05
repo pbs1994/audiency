@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import OrderLookup from "./OrderLookup";
 
 export const metadata: Metadata = {
-  title: "Suivre ma commande | Audiency",
+  title: "Suivre ma commande | BoostInflu",
 };
 
 export default function TrackOrderPage() {

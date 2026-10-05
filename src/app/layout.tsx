@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Audiency — Abonnés, likes et vues Instagram & TikTok",
+  title: "BoostInflu — Abonnés, likes et vues Instagram & TikTok",
   description:
     "Abonnés, likes et vues réels pour Instagram, TikTok, YouTube et plus. Prix les plus bas, livraison instantanée.",
 };

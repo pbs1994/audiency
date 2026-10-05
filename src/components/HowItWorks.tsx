@@ -29,7 +29,7 @@ export default function HowItWorks() {
     <section id="services" className="bg-surface">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
         <h2 className="max-w-md text-3xl font-extrabold text-text sm:text-4xl">
-          Comment utiliser <span className="gradient-brand-text">Audiency</span>
+          Comment utiliser <span className="gradient-brand-text">BoostInflu</span>
         </h2>
         <p className="mt-4 max-w-md text-text-muted">
           Développer votre présence sociale n’a jamais été aussi simple. Suivez

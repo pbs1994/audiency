@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import EngagementCalculator from "./EngagementCalculator";
 
 export const metadata: Metadata = {
-  title: "Calculateur d’engagement | Audiency",
+  title: "Calculateur d’engagement | BoostInflu",
   description: "Calculez votre taux d’engagement Instagram ou TikTok gratuitement.",
 };
 

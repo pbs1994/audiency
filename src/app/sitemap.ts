@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { PLATFORMS } from "@/lib/platforms";
 
-const BASE_URL = "https://audiency.fr";
+const BASE_URL = "https://boostinflu.fr";
 
 const STATIC_PATHS = [
   { path: "/", priority: 1, changeFrequency: "daily" as const },

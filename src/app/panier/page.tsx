@@ -4,7 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import CartView from "./CartView";
 
 export const metadata: Metadata = {
-  title: "Panier | Audiency",
+  title: "Panier | BoostInflu",
 };
 
 export default function CartPage() {

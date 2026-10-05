@@ -4,8 +4,8 @@ import PageHeader from "@/components/PageHeader";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact | Audiency",
-  description: "Contactez l’équipe Audiency pour toute question.",
+  title: "Contact | BoostInflu",
+  description: "Contactez l’équipe BoostInflu pour toute question.",
 };
 
 export default function ContactPage() {
@@ -25,7 +25,7 @@ export default function ContactPage() {
               <Mail size={18} className="mt-0.5 shrink-0 text-violet" />
               <div>
                 <p className="font-semibold text-text">Email</p>
-                <p className="text-sm text-text-muted">contact@audiency.fr</p>
+                <p className="text-sm text-text-muted">contact@boostinflu.fr</p>
               </div>
             </div>
             <div className="flex items-start gap-3">

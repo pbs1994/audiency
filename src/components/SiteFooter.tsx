@@ -50,9 +50,9 @@ export default function SiteFooter() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2">
               <span className="grid h-8 w-8 place-items-center rounded-full gradient-brand text-sm font-bold text-white">
-                A
+                B
               </span>
-              <span className="text-lg font-bold text-on-navy">Audiency</span>
+              <span className="text-lg font-bold text-on-navy">BoostInflu</span>
             </div>
             <p className="mt-4 max-w-[26ch] text-sm leading-relaxed">
               Votre source de confiance pour la croissance sur les réseaux
@@ -67,7 +67,7 @@ export default function SiteFooter() {
                 <MessageCircle size={16} />
               </a>
               <a
-                href="mailto:contact@audiency.fr"
+                href="mailto:contact@boostinflu.fr"
                 aria-label="Email"
                 className="grid h-9 w-9 place-items-center rounded-full border border-navy-line hover:border-on-navy-muted"
               >
@@ -99,7 +99,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-navy-line pt-8 text-xs sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Audiency. Tous droits réservés.</p>
+          <p>© 2026 BoostInflu. Tous droits réservés.</p>
           <div className="flex gap-5">
             <Link href="/conditions-utilisation" className="hover:text-on-navy">Conditions d’utilisation</Link>
             <Link href="/confidentialite" className="hover:text-on-navy">Confidentialité</Link>

@@ -14,7 +14,7 @@ const ITEMS = [
     a: "La livraison démarre généralement en moins de 5 minutes après la confirmation du paiement.",
   },
   {
-    q: "Est-ce sans risque d’utiliser Audiency ?",
+    q: "Est-ce sans risque d’utiliser BoostInflu ?",
     a: "Nos méthodes respectent les conditions d’utilisation des plateformes prises en charge.",
   },
   {

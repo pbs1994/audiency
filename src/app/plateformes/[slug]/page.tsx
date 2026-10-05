@@ -17,7 +17,7 @@ export async function generateMetadata(
   const platform = getPlatform(slug);
   if (!platform) return {};
   return {
-    title: `${platform.name} — Abonnés, vues et likes réels | Audiency`,
+    title: `${platform.name} — Abonnés, vues et likes réels | BoostInflu`,
     description: platform.description,
   };
 }

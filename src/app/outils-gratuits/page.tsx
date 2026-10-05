@@ -4,7 +4,7 @@ import { Hash, Percent, MessageSquareText, DollarSign } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
-  title: "Outils gratuits | Audiency",
+  title: "Outils gratuits | BoostInflu",
 };
 
 const TOOLS = [

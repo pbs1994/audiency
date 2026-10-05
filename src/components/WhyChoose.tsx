@@ -44,7 +44,7 @@ export default function WhyChoose() {
     <section className="bg-surface-soft">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
         <h2 className="max-w-md text-3xl font-extrabold text-text sm:text-4xl">
-          Pourquoi choisir <span className="gradient-brand-text">Audiency</span>
+          Pourquoi choisir <span className="gradient-brand-text">BoostInflu</span>
         </h2>
         <p className="mt-4 max-w-md text-text-muted">
           Une équipe de confiance pour des créateurs du monde entier, pour une

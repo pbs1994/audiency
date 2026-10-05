@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import HashtagGenerator from "./HashtagGenerator";
 
 export const metadata: Metadata = {
-  title: "Générateur de hashtags | Audiency",
+  title: "Générateur de hashtags | BoostInflu",
   description: "Générez des suggestions de hashtags à partir d’un mot-clé.",
 };
 

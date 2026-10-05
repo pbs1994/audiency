@@ -3,8 +3,8 @@ import { Target, Users, ShieldCheck } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
-  title: "À propos | Audiency",
-  description: "L’histoire et la mission d’Audiency, votre partenaire de croissance sociale.",
+  title: "À propos | BoostInflu",
+  description: "L’histoire et la mission de BoostInflu, votre partenaire de croissance sociale.",
 };
 
 const VALUES = [
@@ -29,14 +29,14 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        title="À propos d’Audiency"
+        title="À propos de BoostInflu"
         subtitle="Nous aidons les créateurs et les marques à développer une audience réelle depuis 2023."
       />
 
       <section className="bg-surface">
         <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
           <p className="text-text-muted leading-relaxed">
-            Audiency est né d’un constat simple : développer une audience sur
+            BoostInflu est né d’un constat simple : développer une audience sur
             les réseaux sociaux prend du temps, et les outils existants sont
             souvent chers, lents ou peu fiables. Nous avons construit une
             plateforme qui connecte les créateurs à un réseau de comptes réels
@@ -44,7 +44,7 @@ export default function AboutPage() {
           </p>
           <p className="mt-4 text-text-muted leading-relaxed">
             Aujourd’hui, des milliers de créateurs, d’entreprises et
-            d’agences utilisent Audiency pour accélérer leur croissance sur
+            d’agences utilisent BoostInflu pour accélérer leur croissance sur
             Instagram, TikTok, YouTube et sept autres plateformes.
           </p>
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité | Audiency",
+  title: "Politique de confidentialité | BoostInflu",
 };
 
 const SECTIONS = [
@@ -16,7 +16,7 @@ const SECTIONS = [
   },
   {
     title: "3. Aucun accès à vos comptes",
-    body: "Audiency ne demande jamais votre mot de passe et n’accède à aucun moment à vos comptes sur les réseaux sociaux.",
+    body: "BoostInflu ne demande jamais votre mot de passe et n’accède à aucun moment à vos comptes sur les réseaux sociaux.",
   },
   {
     title: "4. Conservation des données",
@@ -24,7 +24,7 @@ const SECTIONS = [
   },
   {
     title: "5. Vos droits",
-    body: "Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et de suppression de vos données personnelles. Contactez-nous à contact@audiency.fr pour exercer ces droits.",
+    body: "Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et de suppression de vos données personnelles. Contactez-nous à contact@boostinflu.fr pour exercer ces droits.",
   },
   {
     title: "6. Cookies",

@@ -13,7 +13,7 @@ const QUOTES = [
     initial: "Y",
     name: "Yanis B.",
     role: "Créateur de contenu",
-    quote: "Mes vidéos TikTok ont explosé après Audiency. Toutes les vues venaient de vraies personnes !",
+    quote: "Mes vidéos TikTok ont explosé après BoostInflu. Toutes les vues venaient de vraies personnes !",
     followers: "61K abonnés",
   },
   {
@@ -27,7 +27,7 @@ const QUOTES = [
     initial: "K",
     name: "Karim D.",
     role: "Fondateur e-commerce",
-    quote: "Audiency a fait décoller ma marque du jour au lendemain. Engagement réel, je recommande vivement.",
+    quote: "BoostInflu a fait décoller ma marque du jour au lendemain. Engagement réel, je recommande vivement.",
     followers: "210K abonnés",
   },
 ];
@@ -51,7 +51,7 @@ export default function Testimonials() {
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-text-muted">
           Rejoignez des milliers de créateurs satisfaits qui ont développé leur
-          présence sociale avec Audiency.
+          présence sociale avec BoostInflu.
         </p>
 
         <div className="mt-14 grid gap-6 text-left sm:grid-cols-2">

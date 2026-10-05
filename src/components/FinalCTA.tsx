@@ -7,7 +7,7 @@ export default function FinalCTA() {
         </h2>
         <p className="mx-auto mt-4 max-w-md text-white/85">
           Rejoignez des milliers de créateurs qui ont transformé leur présence
-          sociale avec Audiency. Démarrez votre croissance aujourd’hui.
+          sociale avec BoostInflu. Démarrez votre croissance aujourd’hui.
         </p>
         <a
           href="#tarifs"

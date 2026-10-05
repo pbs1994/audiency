@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
-  title: "Politique de remboursement | Audiency",
+  title: "Politique de remboursement | BoostInflu",
 };
 
 const SECTIONS = [

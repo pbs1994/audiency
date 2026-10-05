@@ -37,8 +37,8 @@ export async function generateMetadata(
   if (!found) return {};
   const { service } = found;
   return {
-    title: `${service.title} — ${service.price} | Audiency`,
-    description: `${service.title} : ${service.detail}. ${service.sold} sur Audiency, livraison instantanée, comptes réels, à partir de ${service.price}.`,
+    title: `${service.title} — ${service.price} | BoostInflu`,
+    description: `${service.title} : ${service.detail}. ${service.sold} sur BoostInflu, livraison instantanée, comptes réels, à partir de ${service.price}.`,
   };
 }
 
@@ -123,7 +123,7 @@ export default async function ServicePage(props: PageProps<"/plateformes/[slug]/
 
           <p className="mt-4 max-w-xl text-text-muted">
             {service.detail} sur {platform.name}. Un service parmi les plus demandés
-            d’Audiency, déjà {service.sold} auprès de créateurs et de marques qui font
+            de BoostInflu, déjà {service.sold} auprès de créateurs et de marques qui font
             confiance à notre réseau de comptes réels et actifs.
           </p>
 
@@ -212,7 +212,7 @@ export default async function ServicePage(props: PageProps<"/plateformes/[slug]/
       <section className="bg-surface">
         <div className="mx-auto max-w-4xl px-5 py-14 sm:px-8">
           <h2 className="text-xl font-bold text-text">
-            Pourquoi choisir Audiency pour {service.name.toLowerCase()} {platform.name}
+            Pourquoi choisir BoostInflu pour {service.name.toLowerCase()} {platform.name}
           </h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f) => (
@@ -256,15 +256,15 @@ export default async function ServicePage(props: PageProps<"/plateformes/[slug]/
       {/* Comparison */}
       <section className="bg-surface">
         <div className="mx-auto max-w-4xl px-5 py-14 sm:px-8">
-          <h2 className="text-xl font-bold text-text">Audiency face aux autres services</h2>
+          <h2 className="text-xl font-bold text-text">BoostInflu face aux autres services</h2>
           <div className="mt-6 overflow-hidden rounded-2xl border border-border">
             <div className="grid grid-cols-[1fr_auto_auto] items-center border-b border-border bg-surface-soft px-5 py-4">
               <span />
               <span className="flex w-24 items-center justify-center gap-1.5 font-bold text-text">
                 <span className="grid h-6 w-6 place-items-center rounded-full gradient-brand text-[10px] font-bold text-white">
-                  A
+                  B
                 </span>
-                Audiency
+                BoostInflu
               </span>
               <span className="w-24 text-center text-text-muted">Autres</span>
             </div>

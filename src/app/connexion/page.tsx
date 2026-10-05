@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import LoginTabs from "./LoginTabs";
 
 export const metadata: Metadata = {
-  title: "Connexion | Audiency",
+  title: "Connexion | BoostInflu",
 };
 
 export default function LoginPage() {

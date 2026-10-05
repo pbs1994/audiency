@@ -121,9 +121,9 @@ export default function SiteHeader() {
       <div className="flex w-full items-center justify-between gap-4 px-5 py-3 sm:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2">
           <span className="grid h-8 w-8 place-items-center rounded-full gradient-brand text-sm font-bold text-white">
-            A
+            B
           </span>
-          <span className="text-lg font-bold text-text">Audiency</span>
+          <span className="text-lg font-bold text-text">BoostInflu</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
