@@ -10,6 +10,14 @@ const LOGOS: Record<string, string> = {
   WhatsApp: "/logos/whatsapp.webp",
 };
 
+const FALLBACK_COLORS = ["bg-teal", "bg-violet", "bg-rose", "bg-orange", "bg-green"];
+
+function fallbackColor(name: string) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+  return FALLBACK_COLORS[hash % FALLBACK_COLORS.length];
+}
+
 export function hasPlatformLogo(name: string) {
   return name in LOGOS;
 }
@@ -24,7 +32,19 @@ export default function PlatformLogo({
   className?: string;
 }) {
   const src = LOGOS[name];
-  if (!src) return null;
+
+  if (!src) {
+    // Placeholder until a real logo file is added for this platform.
+    return (
+      <span
+        className={`inline-flex shrink-0 items-center justify-center rounded-md font-bold text-white ${fallbackColor(name)} ${className}`}
+        style={{ width: size, height: size, fontSize: Math.max(9, size * 0.45) }}
+        title={name}
+      >
+        {name.charAt(0).toUpperCase()}
+      </span>
+    );
+  }
 
   return (
     // eslint-disable-next-line @next/next/no-img-element

@@ -190,6 +190,70 @@ export const PLATFORMS: PlatformData[] = [
       { slug: "acheter-vues-de-statut-whatsapp", slugEn: "buy-whatsapp-status-views", title: "Acheter des Vues de Statut WhatsApp", titleEn: "Buy WhatsApp Status Views", name: "Vues de statut", nameEn: "Status Views", detail: "Augmentez la visibilité de vos statuts", detailEn: "Increase your status visibility", priceEUR: 1.99, sold: "9K+", baseQty: 100, unit: "vues", unitEn: "views" },
     ],
   },
+  {
+    slug: "twitch",
+    logoName: "Twitch",
+    name: "Twitch",
+    nameEn: "Twitch",
+    tagline: "Abonnés et spectateurs réels",
+    taglineEn: "Real followers and viewers",
+    description:
+      "Développez votre chaîne Twitch avec des abonnés et des spectateurs réels, pour des lives plus visibles.",
+    descriptionEn: "Grow your Twitch channel with real followers and viewers, for more visible streams.",
+    services: [
+      { slug: "acheter-abonnes-twitch", slugEn: "buy-twitch-followers", title: "Acheter des Abonnés Twitch", titleEn: "Buy Twitch Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "7K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
+      { slug: "acheter-spectateurs-twitch", slugEn: "buy-twitch-viewers", title: "Acheter des Spectateurs en Direct Twitch", titleEn: "Buy Twitch Live Viewers", name: "Spectateurs en direct", nameEn: "Live Viewers", detail: "Boostez votre nombre de spectateurs pendant vos lives", detailEn: "Boost your viewer count during your streams", priceEUR: 4.99, sold: "3K+", baseQty: 10, unit: "spectateurs", unitEn: "viewers" },
+      { slug: "acheter-vues-vod-twitch", slugEn: "buy-twitch-vod-views", title: "Acheter des Vues VOD Twitch", titleEn: "Buy Twitch VOD Views", name: "Vues VOD", nameEn: "VOD Views", detail: "Pour vos rediffusions et clips", detailEn: "For your replays and clips", priceEUR: 1.49, sold: "11K+", baseQty: 1000, unit: "vues", unitEn: "views" },
+    ],
+  },
+  {
+    slug: "discord",
+    logoName: "Discord",
+    name: "Discord",
+    nameEn: "Discord",
+    tagline: "Membres et boosts de serveur réels",
+    taglineEn: "Real server members and boosts",
+    description:
+      "Développez votre serveur Discord avec des membres réels et des boosts, pour une communauté plus active.",
+    descriptionEn: "Grow your Discord server with real members and boosts, for a more active community.",
+    services: [
+      { slug: "acheter-membres-discord", slugEn: "buy-discord-members", title: "Acheter des Membres Discord", titleEn: "Buy Discord Members", name: "Membres", nameEn: "Members", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 2.99, sold: "9K+", highlight: true, baseQty: 100, unit: "membres", unitEn: "members", followerType: true },
+      { slug: "acheter-boosts-discord", slugEn: "buy-discord-boosts", title: "Acheter des Boosts de Serveur Discord", titleEn: "Buy Discord Server Boosts", name: "Boosts de serveur", nameEn: "Server Boosts", detail: "Débloquez les paliers de votre serveur", detailEn: "Unlock your server's boost tiers", priceEUR: 3.99, sold: "2K+", baseQty: 5, unit: "boosts", unitEn: "boosts" },
+      { slug: "acheter-reactions-discord", slugEn: "buy-discord-reactions", title: "Acheter des Réactions Discord", titleEn: "Buy Discord Reactions", name: "Réactions", nameEn: "Reactions", detail: "Engagement sur vos messages", detailEn: "Engagement on your messages", priceEUR: 1.29, sold: "6K+", baseQty: 100, unit: "réactions", unitEn: "reactions" },
+    ],
+  },
+  {
+    slug: "linkedin",
+    logoName: "LinkedIn",
+    name: "LinkedIn",
+    nameEn: "LinkedIn",
+    tagline: "Abonnés et engagement professionnels",
+    taglineEn: "Professional followers and engagement",
+    description:
+      "Renforcez votre crédibilité professionnelle sur LinkedIn avec des abonnés et un engagement réels.",
+    descriptionEn: "Strengthen your professional credibility on LinkedIn with real followers and engagement.",
+    services: [
+      { slug: "acheter-abonnes-linkedin", slugEn: "buy-linkedin-followers", title: "Acheter des Abonnés LinkedIn", titleEn: "Buy LinkedIn Followers", name: "Abonnés", nameEn: "Followers", detail: "Profils professionnels actifs", detailEn: "Active professional profiles", priceEUR: 3.99, sold: "5K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
+      { slug: "acheter-likes-publication-linkedin", slugEn: "buy-linkedin-post-likes", title: "Acheter des Likes Publication LinkedIn", titleEn: "Buy LinkedIn Post Likes", name: "Likes Publication", nameEn: "Post Likes", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 2.49, sold: "8K+", baseQty: 100, unit: "likes", unitEn: "likes" },
+      { slug: "acheter-vues-linkedin", slugEn: "buy-linkedin-views", title: "Acheter des Vues LinkedIn", titleEn: "Buy LinkedIn Views", name: "Vues", nameEn: "Views", detail: "Pour vos publications et articles", detailEn: "For your posts and articles", priceEUR: 2.99, sold: "4K+", baseQty: 1000, unit: "vues", unitEn: "views" },
+    ],
+  },
+  {
+    slug: "threads",
+    logoName: "Threads",
+    name: "Threads",
+    nameEn: "Threads",
+    tagline: "Abonnés, likes et vues réels",
+    taglineEn: "Real followers, likes and views",
+    description:
+      "Développez votre audience sur Threads avec des abonnés et un engagement provenant de comptes réels.",
+    descriptionEn: "Grow your audience on Threads with followers and engagement from real accounts.",
+    services: [
+      { slug: "acheter-abonnes-threads", slugEn: "buy-threads-followers", title: "Acheter des Abonnés Threads", titleEn: "Buy Threads Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 2.99, sold: "6K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
+      { slug: "acheter-likes-threads", slugEn: "buy-threads-likes", title: "Acheter des Likes Threads", titleEn: "Buy Threads Likes", name: "Likes", nameEn: "Likes", detail: "Engagement sur vos publications", detailEn: "Engagement on your posts", priceEUR: 1.79, sold: "14K+", baseQty: 1000, unit: "likes", unitEn: "likes" },
+      { slug: "acheter-vues-threads", slugEn: "buy-threads-views", title: "Acheter des Vues Threads", titleEn: "Buy Threads Views", name: "Vues", nameEn: "Views", detail: "Pour vos publications", detailEn: "For your posts", priceEUR: 1.49, sold: "10K+", baseQty: 1000, unit: "vues", unitEn: "views" },
+    ],
+  },
 ];
 
 export function getPlatform(slug: string) {
