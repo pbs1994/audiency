@@ -202,7 +202,7 @@ export const PLATFORMS: PlatformData[] = [
     descriptionEn: "Grow your Twitch channel with real followers and viewers, for more visible streams.",
     services: [
       { slug: "acheter-abonnes-twitch", slugEn: "buy-twitch-followers", title: "Acheter des Abonnés Twitch", titleEn: "Buy Twitch Followers", name: "Abonnés", nameEn: "Followers", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 3.49, sold: "7K+", highlight: true, baseQty: 100, unit: "abonnés", unitEn: "followers", followerType: true },
-      { slug: "acheter-spectateurs-twitch", slugEn: "buy-twitch-viewers", title: "Acheter des Spectateurs en Direct Twitch", titleEn: "Buy Twitch Live Viewers", name: "Spectateurs en direct", nameEn: "Live Viewers", detail: "Boostez votre nombre de spectateurs pendant vos lives", detailEn: "Boost your viewer count during your streams", priceEUR: 4.99, sold: "3K+", baseQty: 10, unit: "spectateurs", unitEn: "viewers" },
+      { slug: "acheter-spectateurs-twitch", slugEn: "buy-twitch-viewers", title: "Acheter des Spectateurs en Direct Twitch", titleEn: "Buy Twitch Live Viewers", name: "Spectateurs en direct", nameEn: "Live Viewers", detail: "Spectateurs simultanés pendant env. 2h de live", detailEn: "Concurrent viewers for about 2h of livestream", priceEUR: 3.49, sold: "3K+", baseQty: 100, unit: "spectateurs", unitEn: "viewers" },
       { slug: "acheter-vues-vod-twitch", slugEn: "buy-twitch-vod-views", title: "Acheter des Vues VOD Twitch", titleEn: "Buy Twitch VOD Views", name: "Vues VOD", nameEn: "VOD Views", detail: "Pour vos rediffusions et clips", detailEn: "For your replays and clips", priceEUR: 1.49, sold: "11K+", baseQty: 1000, unit: "vues", unitEn: "views" },
     ],
   },
