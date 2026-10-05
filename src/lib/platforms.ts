@@ -207,22 +207,6 @@ export const PLATFORMS: PlatformData[] = [
     ],
   },
   {
-    slug: "discord",
-    logoName: "Discord",
-    name: "Discord",
-    nameEn: "Discord",
-    tagline: "Membres et boosts de serveur réels",
-    taglineEn: "Real server members and boosts",
-    description:
-      "Développez votre serveur Discord avec des membres réels et des boosts, pour une communauté plus active.",
-    descriptionEn: "Grow your Discord server with real members and boosts, for a more active community.",
-    services: [
-      { slug: "acheter-membres-discord", slugEn: "buy-discord-members", title: "Acheter des Membres Discord", titleEn: "Buy Discord Members", name: "Membres", nameEn: "Members", detail: "Comptes actifs et réels", detailEn: "Real, active accounts", priceEUR: 2.99, sold: "9K+", highlight: true, baseQty: 100, unit: "membres", unitEn: "members", followerType: true },
-      { slug: "acheter-boosts-discord", slugEn: "buy-discord-boosts", title: "Acheter des Boosts de Serveur Discord", titleEn: "Buy Discord Server Boosts", name: "Boosts de serveur", nameEn: "Server Boosts", detail: "Débloquez les paliers de votre serveur", detailEn: "Unlock your server's boost tiers", priceEUR: 3.99, sold: "2K+", baseQty: 5, unit: "boosts", unitEn: "boosts" },
-      { slug: "acheter-reactions-discord", slugEn: "buy-discord-reactions", title: "Acheter des Réactions Discord", titleEn: "Buy Discord Reactions", name: "Réactions", nameEn: "Reactions", detail: "Engagement sur vos messages", detailEn: "Engagement on your messages", priceEUR: 1.29, sold: "6K+", baseQty: 100, unit: "réactions", unitEn: "reactions" },
-    ],
-  },
-  {
     slug: "linkedin",
     logoName: "LinkedIn",
     name: "LinkedIn",

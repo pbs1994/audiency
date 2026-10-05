@@ -8,6 +8,9 @@ const LOGOS: Record<string, string> = {
   Spotify: "/logos/spotify.webp",
   Snapchat: "/logos/snapchat.svg",
   WhatsApp: "/logos/whatsapp.webp",
+  LinkedIn: "/logos/linkedin.webp",
+  Threads: "/logos/threads.webp",
+  Twitch: "/logos/twitch.jpeg",
 };
 
 const FALLBACK_COLORS = ["bg-teal", "bg-violet", "bg-rose", "bg-orange", "bg-green"];

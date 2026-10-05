@@ -13,7 +13,7 @@ const ITEMS = {
     { q: "Proposez-vous un réabonnement si je perds des abonnés ?", a: "Oui, une garantie de réabonnement s’applique sur la plupart des services pendant 30 jours." },
     { q: "Quels moyens de paiement acceptez-vous ?", a: "Carte bancaire, Google Pay et Apple Pay, via un paiement chiffré et sécurisé." },
     { q: "Dois-je communiquer mon mot de passe ?", a: "Non, jamais. Seul votre nom d’utilisateur ou l’URL de votre publication est nécessaire." },
-    { q: "Quelles plateformes prenez-vous en charge ?", a: "Instagram, TikTok, YouTube, Facebook, X, Snapchat, Spotify, Telegram, WhatsApp, Twitch, Discord, LinkedIn et Threads." },
+    { q: "Quelles plateformes prenez-vous en charge ?", a: "Instagram, TikTok, YouTube, Facebook, X, Snapchat, Spotify, Telegram, WhatsApp, Twitch, LinkedIn et Threads." },
     { q: "Puis-je suivre ma commande ?", a: "Oui, un tableau de bord en direct affiche la progression jusqu’à la livraison complète." },
   ],
   en: [
@@ -23,7 +23,7 @@ const ITEMS = {
     { q: "Do you offer a refill if I lose followers?", a: "Yes, a refill guarantee applies to most services for 30 days." },
     { q: "What payment methods do you accept?", a: "Credit card, Google Pay and Apple Pay, via encrypted, secure payment." },
     { q: "Do I need to share my password?", a: "No, never. Only your username or the URL of your post is needed." },
-    { q: "Which platforms do you support?", a: "Instagram, TikTok, YouTube, Facebook, X, Snapchat, Spotify, Telegram, WhatsApp, Twitch, Discord, LinkedIn and Threads." },
+    { q: "Which platforms do you support?", a: "Instagram, TikTok, YouTube, Facebook, X, Snapchat, Spotify, Telegram, WhatsApp, Twitch, LinkedIn and Threads." },
     { q: "Can I track my order?", a: "Yes, a live dashboard shows progress all the way through to full delivery." },
   ],
 };

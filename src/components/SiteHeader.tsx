@@ -11,7 +11,7 @@ import { useLocale } from "@/lib/locale-context";
 import { routeHref, platformHref, serviceHref } from "@/lib/i18n";
 
 const MAIN_SLUGS = ["tiktok", "instagram", "youtube", "facebook"];
-const MORE_SLUGS = ["x", "snapchat", "telegram", "whatsapp", "spotify", "twitch", "discord", "linkedin", "threads"];
+const MORE_SLUGS = ["x", "snapchat", "telegram", "whatsapp", "spotify", "twitch", "linkedin", "threads"];
 
 const T = {
   fr: {

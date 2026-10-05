@@ -13,8 +13,8 @@ export async function generateMetadata(props: PageProps<"/[locale]/plateformes">
   return {
     title: fr ? "Toutes les plateformes | BoostInflu" : "All Platforms | BoostInflu",
     description: fr
-      ? "Développez votre audience sur 13 réseaux sociaux avec BoostInflu."
-      : "Grow your audience on 13 social networks with BoostInflu.",
+      ? "Développez votre audience sur 12 réseaux sociaux avec BoostInflu."
+      : "Grow your audience on 12 social networks with BoostInflu.",
     alternates: {
       languages: { fr: `${BASE_URL}/plateformes`, en: `${BASE_URL}/en/platforms` },
     },
