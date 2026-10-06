@@ -24,8 +24,8 @@ const SECTIONS = {
     { title: "12. Données personnelles", body: "Le traitement de vos données est décrit dans notre politique de confidentialité." },
     { title: "13. Communications par email", body: "Nous vous envoyons les emails nécessaires à votre commande et à votre compte (confirmation, suivi, assistance). Avec votre accord, nous pouvons aussi vous adresser des offres ; vous pouvez vous désinscrire à tout moment via le lien présent dans chaque message ou en nous écrivant." },
     { title: "14. Modifications", body: "Nous pouvons mettre à jour ces conditions ; la version en vigueur est celle publiée sur cette page, avec sa date de mise à jour. Les commandes déjà passées restent soumises à la version applicable au moment de l’achat." },
-    { title: "15. Droit applicable et litiges", body: `Ces conditions sont régies par le droit français. En cas de litige, contactez d’abord notre support afin de rechercher une solution amiable. Conformément au Code de la consommation, vous pouvez recourir gratuitement au médiateur de la consommation : ${COMPANY.mediator}. À défaut de résolution amiable, les tribunaux compétents sont ceux déterminés par la loi, sans préjudice de vos droits de consommateur.` },
-    { title: "16. Contact", body: `Pour toute question : ${COMPANY.email}${COMPANY.phone === "[À COMPLÉTER]" ? "" : ` · ${COMPANY.phone}`} · ${COMPANY.address}.` },
+    { title: "15. Droit applicable et litiges", body: `Ces conditions sont régies par le droit français. En cas de litige, contactez d’abord notre support afin de rechercher une solution amiable. À défaut de résolution amiable, les tribunaux compétents sont ceux déterminés par la loi, sans préjudice de vos droits de consommateur.` },
+    { title: "16. Contact", body: `Pour toute question : ${COMPANY.email} · ${COMPANY.address}.` },
   ],
   en: [
     { title: "1. Publisher and acceptance of terms", body: `The boostinflu.com website is published by ${COMPANY.name} (${COMPANY.legalForm}), ${COMPANY.address}, registered under number ${COMPANY.registration} (“BoostInflu”). By accessing the site and placing an order, you accept these terms. If you do not accept them, please do not use our services.` },
@@ -42,8 +42,8 @@ const SECTIONS = {
     { title: "12. Personal data", body: "How we process your data is described in our privacy policy." },
     { title: "13. Email communications", body: "We send the emails needed for your order and account (confirmation, tracking, support). With your consent we may also send you offers; you can unsubscribe at any time via the link in each message or by writing to us." },
     { title: "14. Changes", body: "We may update these terms; the version in effect is the one published on this page, with its update date. Orders already placed remain subject to the version applicable at the time of purchase." },
-    { title: "15. Governing law and disputes", body: `These terms are governed by French law. If a dispute arises, please contact our support first so we can look for an amicable solution. Under the French Consumer Code, you may use the consumer mediator free of charge: ${COMPANY.mediator}. Failing an amicable resolution, the competent courts are those determined by law, without prejudice to your consumer rights.` },
-    { title: "16. Contact", body: `For any question: ${COMPANY.email}${COMPANY.phone === "[À COMPLÉTER]" ? "" : ` · ${COMPANY.phone}`} · ${COMPANY.address}.` },
+    { title: "15. Governing law and disputes", body: `These terms are governed by French law. If a dispute arises, please contact our support first so we can look for an amicable solution. Failing an amicable resolution, the competent courts are those determined by law, without prejudice to your consumer rights.` },
+    { title: "16. Contact", body: `For any question: ${COMPANY.email} · ${COMPANY.address}.` },
   ],
 };
 

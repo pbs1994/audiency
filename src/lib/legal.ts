@@ -8,15 +8,12 @@ const TODO = "[À COMPLÉTER]";
 
 export const COMPANY = {
   name: TODO, // raison sociale, ex. "BoostInflu SAS"
-  legalForm: TODO, // forme juridique et capital social
+  legalForm: "Entrepreneur individuel (self-employed)",
   address: "Résidence Paramount, Flic-en-Flac, Île Maurice", // siège social
   registration: "Mauritius Business Registration Number (BRN) 125012049",
-  vat: TODO, // n° TVA intracommunautaire, si applicable
   publisher: TODO, // directeur de la publication
-  host: TODO, // hébergeur : nom, adresse, téléphone
+  host: "Vercel Inc., États-Unis (vercel.com)",
   email: "contact@boostinflu.com",
-  phone: TODO,
-  mediator: TODO, // médiateur de la consommation (obligatoire en B2C en France)
   lastUpdated: { fr: "6 octobre 2026", en: "October 6, 2026" },
 } as const;
 

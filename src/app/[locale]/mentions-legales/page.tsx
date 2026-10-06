@@ -10,18 +10,16 @@ export async function generateMetadata(props: PageProps<"/[locale]/mentions-lega
 
 const SECTIONS = {
   fr: [
-    { title: "Éditeur du site", body: `${COMPANY.name} — ${COMPANY.legalForm}. Siège social : ${COMPANY.address}. Immatriculation : ${COMPANY.registration}. TVA intracommunautaire : ${COMPANY.vat}. Directeur de la publication : ${COMPANY.publisher}.` },
-    { title: "Contact", body: `Email : ${COMPANY.email}. Téléphone : ${COMPANY.phone}.` },
+    { title: "Éditeur du site", body: `${COMPANY.name} — ${COMPANY.legalForm}. Siège social : ${COMPANY.address}. Immatriculation : ${COMPANY.registration}. Directeur de la publication : ${COMPANY.publisher}.` },
+    { title: "Contact", body: `Email : ${COMPANY.email}.` },
     { title: "Hébergeur", body: COMPANY.host },
     { title: "Paiement", body: `Les paiements sont traités par Paddle.com Market Limited, revendeur officiel (Merchant of Record) de nos services. Conditions d’achat : ${PADDLE_TERMS_URL}.` },
-    { title: "Médiation de la consommation", body: `Conformément aux articles L611-1 et suivants du Code de la consommation, vous pouvez recourir gratuitement au médiateur suivant : ${COMPANY.mediator}.` },
   ],
   en: [
-    { title: "Site publisher", body: `${COMPANY.name} — ${COMPANY.legalForm}. Registered office: ${COMPANY.address}. Registration: ${COMPANY.registration}. VAT number: ${COMPANY.vat}. Publication director: ${COMPANY.publisher}.` },
-    { title: "Contact", body: `Email: ${COMPANY.email}. Phone: ${COMPANY.phone}.` },
+    { title: "Site publisher", body: `${COMPANY.name} — ${COMPANY.legalForm}. Registered office: ${COMPANY.address}. Registration: ${COMPANY.registration}. Publication director: ${COMPANY.publisher}.` },
+    { title: "Contact", body: `Email: ${COMPANY.email}.` },
     { title: "Hosting provider", body: COMPANY.host },
     { title: "Payment", body: `Payments are processed by Paddle.com Market Limited, the Merchant of Record for our services. Buyer terms: ${PADDLE_TERMS_URL}.` },
-    { title: "Consumer mediation", body: `Under articles L611-1 et seq. of the French Consumer Code, you may use the following consumer mediator free of charge: ${COMPANY.mediator}.` },
   ],
 };
 
