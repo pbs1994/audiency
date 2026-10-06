@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LegalDocument from "@/components/LegalDocument";
-import { COMPANY, PADDLE_TERMS_URL } from "@/lib/legal";
+import { COMPANY } from "@/lib/legal";
 import { LOCALES, DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 
 export async function generateMetadata(props: PageProps<"/[locale]/mentions-legales">): Promise<Metadata> {
@@ -13,13 +13,11 @@ const SECTIONS = {
     { title: "Éditeur du site", body: `${COMPANY.legalForm}. Adresse : ${COMPANY.address}. Immatriculation : ${COMPANY.registration}.` },
     { title: "Contact", body: `Email : ${COMPANY.email}.` },
     { title: "Hébergeur", body: COMPANY.host },
-    { title: "Paiement", body: `Les paiements sont traités par Paddle.com Market Limited, revendeur officiel (Merchant of Record) de nos services. Conditions d’achat : ${PADDLE_TERMS_URL}.` },
   ],
   en: [
     { title: "Site publisher", body: `${COMPANY.legalForm}. Address: ${COMPANY.address}. Registration: ${COMPANY.registration}.` },
     { title: "Contact", body: `Email: ${COMPANY.email}.` },
     { title: "Hosting provider", body: COMPANY.host },
-    { title: "Payment", body: `Payments are processed by Paddle.com Market Limited, the Merchant of Record for our services. Buyer terms: ${PADDLE_TERMS_URL}.` },
   ],
 };
 
