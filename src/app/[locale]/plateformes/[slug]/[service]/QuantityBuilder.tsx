@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, X, Loader2 } from "lucide-react";
 import { formatQty } from "@/lib/price";
 import { useCart, createCartItemId } from "@/lib/cart-context";
 import { useCurrency } from "@/lib/currency-context";
@@ -13,8 +12,6 @@ const DISCOUNTS = [0, 5, 12, 20, 30, 38];
 
 type Quality = "standard" | "premium";
 type Gender = "all" | "female" | "male";
-type ApiVerifyStatus = "found" | "not_found" | "format_ok" | "format_invalid" | "error";
-type VerifyUiStatus = "idle" | "checking" | Exclude<ApiVerifyStatus, "error">;
 
 const QUALITY_MULTIPLIER: Record<Quality, number> = { standard: 1, premium: 1.45 };
 const GENDER_MULTIPLIER: Record<Gender, number> = { all: 1, female: 1.2, male: 1.2 };
@@ -25,14 +22,6 @@ const T = {
     popular: "Populaire",
     bestOffer: "Meilleure offre",
     perBase: (price: string, qty: string, unit: string) => `soit ${price} les ${qty} ${unit}`,
-    usernameLabel: "Nom d’utilisateur ou URL",
-    usernamePlaceholder: "@votre_nom_utilisateur",
-    verify: "Vérifier",
-    verifying: "Vérification…",
-    found: "Profil trouvé",
-    validFormat: "Format valide",
-    notFound: "Profil introuvable",
-    invalidFormat: "Format invalide",
     addToCart: "Ajouter au panier",
     quality: "Qualité",
     qualityStandard: "Standard",
@@ -49,14 +38,6 @@ const T = {
     popular: "Popular",
     bestOffer: "Best offer",
     perBase: (price: string, qty: string, unit: string) => `that's ${price} per ${qty} ${unit}`,
-    usernameLabel: "Username or URL",
-    usernamePlaceholder: "@your_username",
-    verify: "Verify",
-    verifying: "Checking…",
-    found: "Profile found",
-    validFormat: "Valid format",
-    notFound: "Profile not found",
-    invalidFormat: "Invalid format",
     addToCart: "Add to cart",
     quality: "Quality",
     qualityStandard: "Standard",
@@ -104,25 +85,6 @@ export default function QuantityBuilder({
   const [index, setIndex] = useState(2);
   const [quality, setQuality] = useState<Quality>("standard");
   const [gender, setGender] = useState<Gender>("all");
-  const [username, setUsername] = useState("");
-  const [verifyStatus, setVerifyStatus] = useState<VerifyUiStatus>("idle");
-
-  const handleVerify = async () => {
-    const value = username.trim();
-    if (value.length < 2) return;
-    setVerifyStatus("checking");
-    try {
-      const res = await fetch("/api/verify-profile", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ platformSlug, username: value }),
-      });
-      const data = (await res.json()) as { status: ApiVerifyStatus };
-      setVerifyStatus(data.status === "error" ? "format_ok" : data.status);
-    } catch {
-      setVerifyStatus("idle");
-    }
-  };
 
   const optionMultiplier =
     (followerType ? QUALITY_MULTIPLIER[quality] : 1) * (genderOption ? GENDER_MULTIPLIER[gender] : 1);
@@ -165,7 +127,6 @@ export default function QuantityBuilder({
       serviceSlug,
       quantity: selected.qty,
       unit,
-      targetUrl: username.trim() || undefined,
     });
     router.push(routeHref(locale, "cart"));
   };
@@ -280,48 +241,6 @@ export default function QuantityBuilder({
         <p className="mt-1 text-xs text-text-muted">
           {t.perBase(format(perBase), formatQty(baseQty), unit)}
         </p>
-      </div>
-
-      <div className="mt-5">
-        <label className="text-sm font-medium text-text" htmlFor="username">
-          {t.usernameLabel}
-        </label>
-        <div className="mt-1.5 flex gap-2">
-          <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-              setVerifyStatus("idle");
-            }}
-            placeholder={t.usernamePlaceholder}
-            className="flex-1 rounded-lg border border-border bg-surface px-3.5 py-2.5 text-sm text-text placeholder:text-text-muted focus:border-violet focus:outline-none"
-          />
-          <button
-            type="button"
-            onClick={handleVerify}
-            disabled={verifyStatus === "checking"}
-            className="shrink-0 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-text hover:border-violet/40 disabled:opacity-60"
-          >
-            {verifyStatus === "checking" ? t.verifying : t.verify}
-          </button>
-        </div>
-        {verifyStatus === "checking" && (
-          <p className="mt-1.5 flex items-center gap-1 text-xs font-medium text-text-muted">
-            <Loader2 size={14} className="animate-spin" /> {t.verifying}
-          </p>
-        )}
-        {(verifyStatus === "found" || verifyStatus === "format_ok") && (
-          <p className="mt-1.5 flex items-center gap-1 text-xs font-medium text-green">
-            <Check size={14} /> {verifyStatus === "found" ? t.found : t.validFormat}
-          </p>
-        )}
-        {(verifyStatus === "not_found" || verifyStatus === "format_invalid") && (
-          <p className="mt-1.5 flex items-center gap-1 text-xs font-medium text-rose">
-            <X size={14} /> {verifyStatus === "not_found" ? t.notFound : t.invalidFormat}
-          </p>
-        )}
       </div>
 
       <button

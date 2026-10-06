@@ -21,6 +21,7 @@ type CartContextValue = {
   items: CartItem[];
   addItem: (item: CartItem) => void;
   removeItem: (id: string) => void;
+  updateItem: (id: string, patch: Partial<CartItem>) => void;
   clear: () => void;
 };
 
@@ -43,10 +44,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     store.setValue((prev) => prev.filter((i) => i.id !== id));
   };
 
+  const updateItem = (id: string, patch: Partial<CartItem>) => {
+    store.setValue((prev) => prev.map((i) => (i.id === id ? { ...i, ...patch } : i)));
+  };
+
   const clear = () => store.setValue([]);
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, clear }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, updateItem, clear }}>
       {children}
     </CartContext.Provider>
   );
