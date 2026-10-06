@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { initializePaddle, type Paddle } from "@paddle/paddle-js";
 import { Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { useCurrency } from "@/lib/currency-context";
 import PlatformLogo from "@/components/PlatformLogo";
 import { routeHref, type Locale } from "@/lib/i18n";
-import { createOrder } from "./actions";
+import { startCheckout } from "./actions";
 
 const T = {
   fr: {
@@ -23,10 +23,9 @@ const T = {
     cashback: "Cashback (15%)",
     total: "Total",
     checkout: "Procéder au paiement",
-    checkoutPending: "Validation…",
+    checkoutPending: "Ouverture du paiement…",
     loginToPay: "Se connecter pour valider",
     secure: "Paiement sécurisé · Satisfait ou remboursé 30 jours",
-    demoNotice: "Mode démo : aucun paiement réel n’est traité pour le moment.",
     error: "Une erreur est survenue, merci de réessayer.",
     missingTarget: "Indiquez un nom d’utilisateur ou une URL pour chaque service avant de continuer.",
     required: "Champ requis",
@@ -43,10 +42,9 @@ const T = {
     cashback: "Cashback (15%)",
     total: "Total",
     checkout: "Proceed to checkout",
-    checkoutPending: "Placing order…",
+    checkoutPending: "Opening payment…",
     loginToPay: "Log in to checkout",
     secure: "Secure payment · 30-day money-back guarantee",
-    demoNotice: "Demo mode: no real payment is processed yet.",
     error: "Something went wrong, please try again.",
     missingTarget: "Enter a username or URL for every service before continuing.",
     required: "Required field",
@@ -55,12 +53,30 @@ const T = {
 
 export default function CartView({ locale, loggedIn }: { locale: Locale; loggedIn: boolean }) {
   const t = T[locale];
-  const router = useRouter();
   const { items, removeItem, updateItem, clear } = useCart();
   const { format } = useCurrency();
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showValidation, setShowValidation] = useState(false);
+
+  const [paddle, setPaddle] = useState<Paddle | null>(null);
+  const clearRef = useRef(clear);
+  useEffect(() => {
+    clearRef.current = clear;
+  });
+
+  useEffect(() => {
+    const token = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN;
+    if (!token) return;
+    initializePaddle({
+      token,
+      environment: process.env.NEXT_PUBLIC_PADDLE_ENV === "sandbox" ? "sandbox" : "production",
+      eventCallback: (event) => {
+        // The order itself is marked paid by the webhook; this only empties the local cart.
+        if (event.name === "checkout.completed") clearRef.current();
+      },
+    }).then((p) => p && setPaddle(p));
+  }, []);
 
   const missingTarget = items.some((i) => !i.targetUrl?.trim());
 
@@ -72,14 +88,21 @@ export default function CartView({ locale, loggedIn }: { locale: Locale; loggedI
     }
     setPending(true);
     setError(null);
-    const result = await createOrder(items);
-    if ("error" in result) {
+    const result = await startCheckout(items);
+    if ("error" in result || !paddle) {
       setError(t.error);
       setPending(false);
       return;
     }
-    clear();
-    router.push(routeHref(locale, "accountOrders"));
+    paddle.Checkout.open({
+      transactionId: result.transactionId,
+      settings: {
+        variant: "one-page",
+        locale,
+        successUrl: `${window.location.origin}${routeHref(locale, "accountOrders")}`,
+      },
+    });
+    setPending(false);
   };
 
   if (items.length === 0) {
@@ -170,7 +193,7 @@ export default function CartView({ locale, loggedIn }: { locale: Locale; loggedI
           <button
             type="button"
             onClick={handleCheckout}
-            disabled={pending}
+            disabled={pending || !paddle}
             className="mt-6 w-full rounded-full gradient-brand py-3 text-sm font-bold text-white disabled:opacity-60"
           >
             {pending ? t.checkoutPending : t.checkout}
@@ -185,7 +208,6 @@ export default function CartView({ locale, loggedIn }: { locale: Locale; loggedI
         )}
         {error && <p className="mt-3 text-center text-sm font-medium text-rose">{error}</p>}
         <p className="mt-3 text-center text-xs text-text-muted">{t.secure}</p>
-        <p className="mt-1 text-center text-[11px] text-text-muted">{t.demoNotice}</p>
       </div>
     </div>
   );

@@ -2,25 +2,24 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getPaddle } from "@/lib/paddle";
 import { getService, getVariantId } from "@/lib/platforms";
+import { computeLineCents } from "@/lib/pricing";
 import type { CartItem } from "@/lib/cart-context";
 
-export type CreateOrderResult = { orderId: string } | { error: string };
+export type StartCheckoutResult = { orderId: string; transactionId: string } | { error: string };
 
 /**
- * Places an order for the signed-in user from their cart.
+ * Starts a real payment for the signed-in user's cart.
  *
- * No real payment processor is wired up yet — this records the order,
- * its items, and the usual 15% cashback as "paid" directly (simulated
- * checkout). Each order item also gets a 'pending' fulfillment_requests
- * row; nothing here calls any delivery/engagement API.
- *
- * Price integrity: priceValue is trusted as computed by the cart (same as
- * the rest of the site already does for display). Once a real payment
- * processor is wired, this is the place to recompute prices server-side
- * from the catalog instead of trusting the client.
+ * Prices are recomputed here from the static catalog — the cart's
+ * priceValue is never trusted. The order is stored as 'pending_payment'
+ * and a Paddle transaction with non-catalog prices is created for it;
+ * the client then opens Paddle's overlay on the returned transactionId.
+ * The order only becomes 'paid' (and earns cashback) when Paddle's
+ * transaction.completed webhook calls complete_order().
  */
-export async function createOrder(items: CartItem[]): Promise<CreateOrderResult> {
+export async function startCheckout(items: CartItem[]): Promise<StartCheckoutResult> {
   const supabase = await createClient();
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) return { error: "not_authenticated" };
@@ -28,36 +27,62 @@ export async function createOrder(items: CartItem[]): Promise<CreateOrderResult>
   if (items.length === 0) return { error: "empty_cart" };
   if (items.some((item) => !item.targetUrl?.trim())) return { error: "missing_target" };
 
-  const payload = items.map((item) => {
-    // service_id / service_variant_id are resolved from the trusted static
-    // catalog, never taken from the client, so the code always matches a
-    // real ServiceItem and reflects what that service actually offers.
+  const lines = [];
+  for (const item of items) {
     const found =
       item.platformSlug && item.serviceSlug ? getService(item.platformSlug, item.serviceSlug) : undefined;
-    const variantId = found
-      ? getVariantId(found.service, item.quality ?? "standard", item.gender ?? "all")
-      : null;
+    if (!found) return { error: "unknown_service" };
 
-    return {
-      service_id: found?.service.id ?? null,
-      service_variant_id: variantId,
-      platform_slug: item.platformSlug ?? "autre",
-      service_slug: item.serviceSlug ?? "service",
-      service_name: item.name,
-      target_url: item.targetUrl!.trim(),
-      quantity: item.quantity ?? 1,
-      unit: item.unit ?? "unités",
-      unit_price_eur: item.priceValue / (item.quantity ?? 1),
-      line_total_eur: item.priceValue,
-    };
-  });
+    const quantity = item.quantity ?? 1;
+    const quality = item.quality ?? "standard";
+    const gender = item.gender ?? "all";
+    const cents = computeLineCents(found.service, quantity, quality, gender);
+    if (cents === null || cents <= 0) return { error: "invalid_quantity" };
+
+    lines.push({ item, service: found.service, quantity, cents, quality, gender });
+  }
+
+  const payload = lines.map(({ item, service, quantity, cents, quality, gender }) => ({
+    service_id: service.id,
+    service_variant_id: getVariantId(service, quality, gender),
+    platform_slug: item.platformSlug,
+    service_slug: item.serviceSlug,
+    service_name: item.name,
+    target_url: item.targetUrl!.trim(),
+    quantity,
+    unit: item.unit ?? "unités",
+    unit_price_eur: cents / 100 / quantity,
+    line_total_eur: cents / 100,
+  }));
 
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("place_order", {
     p_user_id: userData.user.id,
     items: payload,
   });
-
   if (error) return { error: error.message };
-  return { orderId: data as string };
+  const orderId = data as string;
+
+  try {
+    const transaction = await getPaddle().transactions.create({
+      currencyCode: "EUR",
+      customData: { order_id: orderId, user_id: userData.user.id },
+      items: lines.map(({ item, service, cents, quality, gender }) => ({
+        quantity: 1,
+        price: {
+          name: item.name,
+          description: `${getVariantId(service, quality, gender)} — ${item.detail}`,
+          productId: process.env.PADDLE_PRODUCT_ID!,
+          unitPrice: { amount: String(cents), currencyCode: "EUR" },
+          quantity: { minimum: 1, maximum: 1 },
+        },
+      })),
+    });
+
+    await admin.from("orders").update({ paddle_transaction_id: transaction.id }).eq("id", orderId);
+    return { orderId, transactionId: transaction.id };
+  } catch {
+    await admin.from("orders").update({ status: "cancelled" }).eq("id", orderId);
+    return { error: "payment_unavailable" };
+  }
 }

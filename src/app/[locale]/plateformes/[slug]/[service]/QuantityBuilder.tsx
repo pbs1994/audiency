@@ -3,18 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatQty } from "@/lib/price";
+import { MULTIPLIERS, DISCOUNTS, QUALITY_MULTIPLIER, GENDER_MULTIPLIER } from "@/lib/pricing";
 import { useCart, createCartItemId } from "@/lib/cart-context";
 import { useCurrency } from "@/lib/currency-context";
 import { routeHref, type Locale } from "@/lib/i18n";
 
-const MULTIPLIERS = [1, 2, 5, 10, 20, 50];
-const DISCOUNTS = [0, 5, 12, 20, 30, 38];
-
 type Quality = "standard" | "premium";
 type Gender = "all" | "female" | "male";
-
-const QUALITY_MULTIPLIER: Record<Quality, number> = { standard: 1, premium: 1.45 };
-const GENDER_MULTIPLIER: Record<Gender, number> = { all: 1, female: 1.2, male: 1.2 };
 
 const T = {
   fr: {
