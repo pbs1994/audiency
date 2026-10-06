@@ -9,8 +9,8 @@ const TODO = "[À COMPLÉTER]";
 export const COMPANY = {
   name: TODO, // raison sociale, ex. "BoostInflu SAS"
   legalForm: TODO, // forme juridique et capital social
-  address: TODO, // siège social
-  registration: TODO, // SIREN / SIRET / RCS (ou n° d’immatriculation)
+  address: "Résidence Paramount, Flic-en-Flac, Île Maurice", // siège social
+  registration: "Mauritius Business Registration Number (BRN) 125012049",
   vat: TODO, // n° TVA intracommunautaire, si applicable
   publisher: TODO, // directeur de la publication
   host: TODO, // hébergeur : nom, adresse, téléphone
