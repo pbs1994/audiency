@@ -1,0 +1,59 @@
+<!--
+  Subject suggestion: Confirmez votre compte BoostInflu
+  Paste this into: Supabase Dashboard → Authentication → Emails → Confirm signup
+  Requires: the signUp() call passes emailRedirectTo so {{ .RedirectTo }}
+  already points at /auth/confirm?next=... — see src/app/[locale]/connexion/actions.ts
+-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f6f6fb;padding:40px 16px;font-family:Helvetica,Arial,sans-serif;">
+  <tr>
+    <td align="center">
+      <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="max-width:480px;width:100%;background-color:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e7e7f1;">
+        <tr>
+          <td align="center" style="background-color:#7c4dff;background-image:linear-gradient(135deg,#14b8a6,#7c4dff 55%,#f43f8d);padding:32px 24px;">
+            <table role="presentation" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="width:40px;height:40px;border-radius:50%;background-color:rgba(255,255,255,0.18);text-align:center;vertical-align:middle;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:bold;color:#ffffff;">B</td>
+                <td style="padding-left:10px;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:bold;color:#ffffff;">BoostInflu</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:36px 32px 8px 32px;">
+            <p style="margin:0 0 16px 0;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:bold;color:#15152a;">
+              Confirmez votre adresse email
+            </p>
+            <p style="margin:0 0 24px 0;font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;color:#65657d;">
+              Bienvenue sur BoostInflu ! Cliquez sur le bouton ci-dessous pour confirmer
+              <strong style="color:#15152a;">{{ .Email }}</strong> et activer votre compte.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:0 32px 32px 32px;">
+            <table role="presentation" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="border-radius:999px;background-color:#7c4dff;">
+                  <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=signup"
+                     style="display:inline-block;padding:14px 32px;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:999px;">
+                    Confirmer mon compte
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 32px 32px 32px;border-top:1px solid #e7e7f1;">
+            <p style="margin:24px 0 0 0;font-family:Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#9494ad;">
+              Vous n'êtes pas à l'origine de cette demande ? Ignorez simplement cet email, aucun compte ne sera créé.
+            </p>
+          </td>
+        </tr>
+      </table>
+      <p style="margin:20px 0 0 0;font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#9494ad;">
+        © BoostInflu
+      </p>
+    </td>
+  </tr>
+</table>

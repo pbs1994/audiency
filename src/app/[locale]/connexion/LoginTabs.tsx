@@ -1,8 +1,10 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import { signIn, signUp, type AuthFormState } from "./actions";
-import type { Locale } from "@/lib/i18n";
+import { routeHref, type Locale } from "@/lib/i18n";
 
 const T = {
   fr: {
@@ -13,6 +15,7 @@ const T = {
     email: "Email",
     emailPlaceholder: "vous@exemple.fr",
     password: "Mot de passe",
+    forgotPassword: "Mot de passe oublié ?",
     loginSubmit: "Se connecter",
     signupSubmit: "Créer mon compte",
     pending: "Un instant…",
@@ -25,6 +28,7 @@ const T = {
     email: "Email",
     emailPlaceholder: "you@example.com",
     password: "Password",
+    forgotPassword: "Forgot password?",
     loginSubmit: "Log in",
     signupSubmit: "Create my account",
     pending: "One moment…",
@@ -71,6 +75,12 @@ export default function LoginTabs({ locale }: { locale: Locale }) {
         </button>
       </div>
 
+      {state.message ? (
+        <div className="mt-6 flex items-start gap-3 rounded-xl border border-green/30 bg-green/10 p-4">
+          <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-green" />
+          <p className="text-sm text-text">{state.message}</p>
+        </div>
+      ) : (
       <form key={tab} className="mt-6 space-y-4" action={tab === "login" ? loginAction : signupAction}>
         {tab === "signup" && (
           <div>
@@ -113,6 +123,14 @@ export default function LoginTabs({ locale }: { locale: Locale }) {
             className="mt-1.5 w-full rounded-lg border border-border bg-surface px-3.5 py-2.5 text-sm text-text focus:border-violet focus:outline-none"
             placeholder="••••••••"
           />
+          {tab === "login" && (
+            <Link
+              href={routeHref(locale, "forgotPassword")}
+              className="mt-1.5 inline-block text-xs font-medium text-violet"
+            >
+              {t.forgotPassword}
+            </Link>
+          )}
         </div>
 
         {state.error && <p className="text-sm font-medium text-rose">{state.error}</p>}
@@ -125,6 +143,7 @@ export default function LoginTabs({ locale }: { locale: Locale }) {
           {pending ? t.pending : tab === "login" ? t.loginSubmit : t.signupSubmit}
         </button>
       </form>
+      )}
     </div>
   );
 }
