@@ -10,7 +10,7 @@ export async function generateMetadata(props: PageProps<"/[locale]/confidentiali
 
 const SECTIONS = {
   fr: [
-    { title: "1. Responsable du traitement", body: `Le responsable du traitement est ${COMPANY.name}, ${COMPANY.address}. Contact : ${COMPANY.email}.` },
+    { title: "1. Responsable du traitement", body: `Le responsable du traitement est l’exploitant du site boostinflu.com (${COMPANY.legalForm}), ${COMPANY.address}. Contact : ${COMPANY.email}.` },
     { title: "2. Données collectées", body: "Nous collectons uniquement les informations nécessaires : adresse email et mot de passe (chiffré) de votre compte, nom d’utilisateur ou URL de publication fournis pour chaque commande, historique de commandes et de solde, et les messages que vous nous envoyez. Vos données de paiement (carte, adresse de facturation) sont collectées directement par Paddle et ne transitent pas par nos serveurs." },
     { title: "3. Finalités et bases légales", body: "Vos données servent à exécuter vos commandes et gérer votre compte (exécution du contrat), à répondre à vos demandes et prévenir la fraude (intérêt légitime), à respecter nos obligations comptables et fiscales (obligation légale) et, si vous y avez consenti, à vous envoyer des offres. Nous ne vendons jamais vos données." },
     { title: "4. Destinataires et sous-traitants", body: "Paddle.com Market Limited traite les paiements en tant que revendeur officiel et responsable de traitement indépendant pour les données de transaction (voir sa politique de confidentialité). Notre base de données et l’authentification sont hébergées par Supabase, et le site par notre hébergeur, en tant que sous-traitants. Certains de ces prestataires peuvent traiter des données hors de l’Union européenne, avec des garanties appropriées (clauses contractuelles types ou équivalent)." },
@@ -21,7 +21,7 @@ const SECTIONS = {
     { title: "9. Modifications", body: "Nous pouvons mettre à jour cette politique ; la version en vigueur est celle publiée sur cette page." },
   ],
   en: [
-    { title: "1. Data controller", body: `The data controller is ${COMPANY.name}, ${COMPANY.address}. Contact: ${COMPANY.email}.` },
+    { title: "1. Data controller", body: `The data controller is the operator of boostinflu.com (${COMPANY.legalForm}), ${COMPANY.address}. Contact: ${COMPANY.email}.` },
     { title: "2. Data we collect", body: "We only collect what we need: your account email and (encrypted) password, the username or post URL you provide for each order, your order and balance history, and the messages you send us. Your payment data (card, billing address) is collected directly by Paddle and never passes through our servers." },
     { title: "3. Purposes and legal bases", body: "Your data is used to fulfil your orders and manage your account (performance of a contract), to answer your requests and prevent fraud (legitimate interest), to meet our accounting and tax obligations (legal obligation) and, if you have consented, to send you offers. We never sell your data." },
     { title: "4. Recipients and processors", body: "Paddle.com Market Limited processes payments as our Merchant of Record and as an independent controller for transaction data (see its privacy policy). Our database and authentication are hosted by Supabase, and the site by our hosting provider, as processors. Some of these providers may process data outside the European Union, with appropriate safeguards (standard contractual clauses or equivalent)." },

@@ -10,13 +10,13 @@ export async function generateMetadata(props: PageProps<"/[locale]/mentions-lega
 
 const SECTIONS = {
   fr: [
-    { title: "Éditeur du site", body: `${COMPANY.name} — ${COMPANY.legalForm}. Siège social : ${COMPANY.address}. Immatriculation : ${COMPANY.registration}. Directeur de la publication : ${COMPANY.publisher}.` },
+    { title: "Éditeur du site", body: `${COMPANY.legalForm}. Adresse : ${COMPANY.address}. Immatriculation : ${COMPANY.registration}.` },
     { title: "Contact", body: `Email : ${COMPANY.email}.` },
     { title: "Hébergeur", body: COMPANY.host },
     { title: "Paiement", body: `Les paiements sont traités par Paddle.com Market Limited, revendeur officiel (Merchant of Record) de nos services. Conditions d’achat : ${PADDLE_TERMS_URL}.` },
   ],
   en: [
-    { title: "Site publisher", body: `${COMPANY.name} — ${COMPANY.legalForm}. Registered office: ${COMPANY.address}. Registration: ${COMPANY.registration}. Publication director: ${COMPANY.publisher}.` },
+    { title: "Site publisher", body: `${COMPANY.legalForm}. Address: ${COMPANY.address}. Registration: ${COMPANY.registration}.` },
     { title: "Contact", body: `Email: ${COMPANY.email}.` },
     { title: "Hosting provider", body: COMPANY.host },
     { title: "Payment", body: `Payments are processed by Paddle.com Market Limited, the Merchant of Record for our services. Buyer terms: ${PADDLE_TERMS_URL}.` },
