@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import PageHeader from "@/components/PageHeader";
+import LegalDocument from "@/components/LegalDocument";
+import { COMPANY, PADDLE_TERMS_URL } from "@/lib/legal";
 import { LOCALES, DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 
 export async function generateMetadata(props: PageProps<"/[locale]/conditions-utilisation">): Promise<Metadata> {
@@ -9,47 +10,50 @@ export async function generateMetadata(props: PageProps<"/[locale]/conditions-ut
 
 const SECTIONS = {
   fr: [
-    { title: "1. Acceptation des conditions", body: "En accédant au site BoostInflu et en utilisant ses services, vous acceptez d’être lié par les présentes conditions d’utilisation. Si vous n’acceptez pas ces conditions, veuillez ne pas utiliser nos services." },
-    { title: "2. Description du service", body: "BoostInflu propose des services de croissance pour les réseaux sociaux (abonnés, likes, vues et autres formes d’engagement) provenant de comptes réels et actifs. Les délais de livraison sont donnés à titre indicatif et peuvent varier selon la demande." },
-    { title: "3. Compte et commandes", body: "Vous êtes responsable de l’exactitude des informations fournies lors d’une commande (nom d’utilisateur, URL de publication). BoostInflu ne demande jamais votre mot de passe et ne requiert aucun accès à votre compte pour livrer ses services." },
-    { title: "4. Utilisation autorisée", body: "Vous vous engagez à utiliser nos services conformément aux lois applicables et à ne pas les détourner à des fins frauduleuses. BoostInflu se réserve le droit de refuser ou d’annuler toute commande suspecte." },
-    { title: "5. Limitation de responsabilité", body: "BoostInflu ne peut être tenu responsable des changements apportés par les plateformes tierces (Instagram, TikTok, YouTube, etc.) à leurs algorithmes ou conditions d’utilisation, susceptibles d’affecter les résultats de nos services." },
-    { title: "6. Modifications", body: "Ces conditions peuvent être mises à jour à tout moment. La version en vigueur est celle publiée sur cette page." },
+    { title: "1. Éditeur et acceptation des conditions", body: `Le site boostinflu.com est édité par ${COMPANY.name} (${COMPANY.legalForm}), ${COMPANY.address}, immatriculée sous le numéro ${COMPANY.registration} (ci-après « BoostInflu »). En accédant au site et en passant commande, vous acceptez les présentes conditions. Si vous ne les acceptez pas, veuillez ne pas utiliser nos services.` },
+    { title: "2. Description du service", body: "BoostInflu propose des services de croissance pour les réseaux sociaux (abonnés, likes, vues et autres formes d’engagement) provenant de comptes réels et actifs. Les délais de livraison sont donnés à titre indicatif et peuvent varier selon la demande et la plateforme concernée." },
+    { title: "3. Âge et capacité", body: "Vous déclarez avoir au moins 18 ans et la capacité juridique de conclure un contrat. Les présentes conditions ne portent pas atteinte aux droits dont vous disposez en tant que consommateur." },
+    { title: "4. Compte et commandes", body: "Vous êtes responsable de l’exactitude des informations fournies lors d’une commande (nom d’utilisateur, URL de publication) et de la confidentialité de vos identifiants. Le profil ou la publication ciblé doit être public pendant toute la livraison. BoostInflu ne demande jamais votre mot de passe et ne requiert aucun accès à votre compte pour livrer ses services." },
+    { title: "5. Prix et paiement", body: `Les prix sont indiqués en euros. Le paiement est traité par Paddle.com Market Limited (« Paddle »), qui agit en qualité de revendeur officiel (Merchant of Record) de nos services : Paddle encaisse le prix, calcule et reverse les taxes applicables, émet votre reçu et gère les remboursements. Votre achat est également soumis aux conditions d’achat de Paddle (${PADDLE_TERMS_URL}). En cas d’erreur manifeste d’affichage du prix, nous pouvons annuler la commande et vous rembourser intégralement, ou vous contacter pour obtenir votre accord sur le prix correct.` },
+    { title: "6. Exécution et délais", body: "L’exécution du service démarre après confirmation du paiement. Les commandes sont livrées progressivement afin de garantir un résultat naturel ; la durée dépend du service et de la quantité commandée. Le suivi de votre commande est disponible dans votre compte et sur la page de suivi de commande." },
+    { title: "7. Droit de rétractation", body: "Vous disposez en principe de 14 jours pour vous rétracter d’un achat à distance. Cependant, nos services sont des services numériques dont l’exécution commence immédiatement : en validant votre commande, vous demandez expressément le démarrage immédiat de l’exécution et reconnaissez perdre votre droit de rétractation dès que le service a été pleinement exécuté (article L221-28 du Code de la consommation). Cela n’affecte pas les garanties commerciales décrites dans notre politique de remboursement." },
+    { title: "8. Garanties et remboursements", body: "Les conditions de nos garanties (satisfaction 30 jours, réapprovisionnement) et de remboursement sont détaillées dans notre politique de remboursement, qui fait partie des présentes conditions." },
+    { title: "9. Utilisation autorisée", body: "Vous vous engagez à utiliser nos services conformément aux lois applicables et aux conditions des plateformes concernées, et à ne pas les détourner à des fins frauduleuses. BoostInflu se réserve le droit de refuser ou d’annuler toute commande suspecte, avec remboursement dans ce cas. En cas de contestation de paiement abusive ou de litige sur une commande exécutée, nous pouvons produire les journaux d’exécution de la commande comme preuve." },
+    { title: "10. Limitation de responsabilité", body: "BoostInflu ne peut être tenu responsable des changements apportés par les plateformes tierces (Instagram, TikTok, YouTube, etc.) à leurs algorithmes, fonctionnalités ou conditions d’utilisation, susceptibles d’affecter les résultats de nos services, ni des mesures prises par ces plateformes sur votre compte. Rien dans ces conditions n’exclut ni ne limite notre responsabilité lorsque la loi l’interdit, notamment en cas de faute lourde ou de dol." },
+    { title: "11. Propriété intellectuelle", body: "Les contenus du site (textes, logos, graphismes, code) sont protégés et appartiennent à BoostInflu ou à ses concédants. Les marques des plateformes citées appartiennent à leurs propriétaires respectifs ; BoostInflu n’est affilié à aucune d’entre elles. Aucune licence ne vous est accordée sur ces éléments." },
+    { title: "12. Données personnelles", body: "Le traitement de vos données est décrit dans notre politique de confidentialité." },
+    { title: "13. Communications par email", body: "Nous vous envoyons les emails nécessaires à votre commande et à votre compte (confirmation, suivi, assistance). Avec votre accord, nous pouvons aussi vous adresser des offres ; vous pouvez vous désinscrire à tout moment via le lien présent dans chaque message ou en nous écrivant." },
+    { title: "14. Modifications", body: "Nous pouvons mettre à jour ces conditions ; la version en vigueur est celle publiée sur cette page, avec sa date de mise à jour. Les commandes déjà passées restent soumises à la version applicable au moment de l’achat." },
+    { title: "15. Droit applicable et litiges", body: `Ces conditions sont régies par le droit français. En cas de litige, contactez d’abord notre support afin de rechercher une solution amiable. Conformément au Code de la consommation, vous pouvez recourir gratuitement au médiateur de la consommation : ${COMPANY.mediator}. À défaut de résolution amiable, les tribunaux compétents sont ceux déterminés par la loi, sans préjudice de vos droits de consommateur.` },
+    { title: "16. Contact", body: `Pour toute question : ${COMPANY.email}${COMPANY.phone === "[À COMPLÉTER]" ? "" : ` · ${COMPANY.phone}`} · ${COMPANY.address}.` },
   ],
   en: [
-    { title: "1. Acceptance of terms", body: "By accessing the BoostInflu website and using its services, you agree to be bound by these terms of service. If you do not accept these terms, please do not use our services." },
-    { title: "2. Service description", body: "BoostInflu offers social media growth services (followers, likes, views and other forms of engagement) from real, active accounts. Delivery times are indicative and may vary depending on demand." },
-    { title: "3. Account and orders", body: "You are responsible for the accuracy of the information provided when placing an order (username, post URL). BoostInflu never asks for your password and never requires access to your account to deliver its services." },
-    { title: "4. Authorized use", body: "You agree to use our services in accordance with applicable laws and not to misuse them for fraudulent purposes. BoostInflu reserves the right to refuse or cancel any suspicious order." },
-    { title: "5. Limitation of liability", body: "BoostInflu cannot be held responsible for changes made by third-party platforms (Instagram, TikTok, YouTube, etc.) to their algorithms or terms of service, which may affect the results of our services." },
-    { title: "6. Changes", body: "These terms may be updated at any time. The version in effect is the one published on this page." },
+    { title: "1. Publisher and acceptance of terms", body: `The boostinflu.com website is published by ${COMPANY.name} (${COMPANY.legalForm}), ${COMPANY.address}, registered under number ${COMPANY.registration} (“BoostInflu”). By accessing the site and placing an order, you accept these terms. If you do not accept them, please do not use our services.` },
+    { title: "2. Service description", body: "BoostInflu offers social media growth services (followers, likes, views and other forms of engagement) from real, active accounts. Delivery times are indicative and may vary depending on demand and the platform concerned." },
+    { title: "3. Age and capacity", body: "You declare that you are at least 18 years old and legally able to enter into a contract. These terms do not affect the rights you have as a consumer." },
+    { title: "4. Account and orders", body: "You are responsible for the accuracy of the information provided when placing an order (username, post URL) and for keeping your login details confidential. The targeted profile or post must remain public throughout delivery. BoostInflu never asks for your password and never requires access to your account to deliver its services." },
+    { title: "5. Prices and payment", body: `Prices are shown in euros. Payment is processed by Paddle.com Market Limited (“Paddle”), which acts as the Merchant of Record for our services: Paddle collects the price, calculates and remits applicable taxes, issues your receipt and handles refunds. Your purchase is also subject to Paddle’s buyer terms (${PADDLE_TERMS_URL}). If a price is obviously displayed in error, we may cancel the order and refund you in full, or contact you to confirm the correct price.` },
+    { title: "6. Delivery and timing", body: "Delivery starts once payment is confirmed. Orders are delivered gradually to keep results natural; the duration depends on the service and the quantity ordered. You can follow your order in your account and on the order tracking page." },
+    { title: "7. Right of withdrawal", body: "You normally have 14 days to withdraw from a distance purchase. However, our services are digital services whose performance begins immediately: by confirming your order you expressly request immediate performance and acknowledge that you lose your right of withdrawal once the service has been fully performed (article L221-28 of the French Consumer Code). This does not affect the commercial guarantees described in our refund policy." },
+    { title: "8. Guarantees and refunds", body: "The terms of our guarantees (30-day satisfaction, refill) and of refunds are set out in our refund policy, which forms part of these terms." },
+    { title: "9. Authorized use", body: "You agree to use our services in accordance with applicable laws and the terms of the platforms concerned, and not to misuse them for fraudulent purposes. BoostInflu reserves the right to refuse or cancel any suspicious order, with a refund in that case. In the event of an abusive payment dispute or a dispute over a completed order, we may produce the order’s delivery logs as evidence." },
+    { title: "10. Limitation of liability", body: "BoostInflu cannot be held responsible for changes made by third-party platforms (Instagram, TikTok, YouTube, etc.) to their algorithms, features or terms, which may affect the results of our services, nor for action those platforms take on your account. Nothing in these terms excludes or limits our liability where the law does not allow it, including in cases of gross negligence or wilful misconduct." },
+    { title: "11. Intellectual property", body: "The site’s content (text, logos, graphics, code) is protected and belongs to BoostInflu or its licensors. The trademarks of the platforms mentioned belong to their respective owners; BoostInflu is not affiliated with any of them. No licence is granted to you over these items." },
+    { title: "12. Personal data", body: "How we process your data is described in our privacy policy." },
+    { title: "13. Email communications", body: "We send the emails needed for your order and account (confirmation, tracking, support). With your consent we may also send you offers; you can unsubscribe at any time via the link in each message or by writing to us." },
+    { title: "14. Changes", body: "We may update these terms; the version in effect is the one published on this page, with its update date. Orders already placed remain subject to the version applicable at the time of purchase." },
+    { title: "15. Governing law and disputes", body: `These terms are governed by French law. If a dispute arises, please contact our support first so we can look for an amicable solution. Under the French Consumer Code, you may use the consumer mediator free of charge: ${COMPANY.mediator}. Failing an amicable resolution, the competent courts are those determined by law, without prejudice to your consumer rights.` },
+    { title: "16. Contact", body: `For any question: ${COMPANY.email}${COMPANY.phone === "[À COMPLÉTER]" ? "" : ` · ${COMPANY.phone}`} · ${COMPANY.address}.` },
   ],
 };
 
 const T = {
-  fr: { title: "Conditions d’utilisation", subtitle: "Dernière mise à jour : 1er janvier 2026" },
-  en: { title: "Terms of Service", subtitle: "Last updated: January 1, 2026" },
+  fr: { title: "Conditions d’utilisation", subtitle: `Dernière mise à jour : ${COMPANY.lastUpdated.fr}` },
+  en: { title: "Terms of Service", subtitle: `Last updated: ${COMPANY.lastUpdated.en}` },
 };
 
 export default async function TermsPage(props: PageProps<"/[locale]/conditions-utilisation">) {
   const { locale: raw } = await props.params;
   const locale: Locale = (LOCALES as readonly string[]).includes(raw) ? (raw as Locale) : DEFAULT_LOCALE;
-  const t = T[locale];
-  const sections = SECTIONS[locale];
-
-  return (
-    <>
-      <PageHeader title={t.title} subtitle={t.subtitle} />
-      <section className="bg-surface">
-        <div className="mx-auto max-w-3xl space-y-8 px-5 py-16 sm:px-8">
-          {sections.map((s) => (
-            <div key={s.title}>
-              <h2 className="font-bold text-text">{s.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-text-muted">{s.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  );
+  return <LegalDocument title={T[locale].title} subtitle={T[locale].subtitle} sections={SECTIONS[locale]} />;
 }

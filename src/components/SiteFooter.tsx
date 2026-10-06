@@ -119,6 +119,9 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
             <Link href={routeHref(locale, "refunds")} className="hover:text-on-navy">
               {fr ? "Remboursement" : "Refund Policy"}
             </Link>
+            <Link href={routeHref(locale, "legalNotice")} className="hover:text-on-navy">
+              {fr ? "Mentions légales" : "Legal Notice"}
+            </Link>
           </div>
         </div>
       </div>

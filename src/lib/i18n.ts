@@ -24,6 +24,7 @@ export const STATIC_ROUTES = {
   terms: { fr: "conditions-utilisation", en: "terms-of-service" },
   privacy: { fr: "confidentialite", en: "privacy-policy" },
   refunds: { fr: "remboursement", en: "refund-policy" },
+  legalNotice: { fr: "mentions-legales", en: "legal-notice" },
   login: { fr: "connexion", en: "login" },
   forgotPassword: { fr: "mot-de-passe-oublie", en: "forgot-password" },
   resetPassword: { fr: "reinitialiser-mot-de-passe", en: "reset-password" },

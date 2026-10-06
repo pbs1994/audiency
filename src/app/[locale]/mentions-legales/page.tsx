@@ -1,0 +1,37 @@
+import type { Metadata } from "next";
+import LegalDocument from "@/components/LegalDocument";
+import { COMPANY, PADDLE_TERMS_URL } from "@/lib/legal";
+import { LOCALES, DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
+
+export async function generateMetadata(props: PageProps<"/[locale]/mentions-legales">): Promise<Metadata> {
+  const { locale } = await props.params;
+  return { title: locale === "fr" ? "Mentions légales | BoostInflu" : "Legal Notice | BoostInflu" };
+}
+
+const SECTIONS = {
+  fr: [
+    { title: "Éditeur du site", body: `${COMPANY.name} — ${COMPANY.legalForm}. Siège social : ${COMPANY.address}. Immatriculation : ${COMPANY.registration}. TVA intracommunautaire : ${COMPANY.vat}. Directeur de la publication : ${COMPANY.publisher}.` },
+    { title: "Contact", body: `Email : ${COMPANY.email}. Téléphone : ${COMPANY.phone}.` },
+    { title: "Hébergeur", body: COMPANY.host },
+    { title: "Paiement", body: `Les paiements sont traités par Paddle.com Market Limited, revendeur officiel (Merchant of Record) de nos services. Conditions d’achat : ${PADDLE_TERMS_URL}.` },
+    { title: "Médiation de la consommation", body: `Conformément aux articles L611-1 et suivants du Code de la consommation, vous pouvez recourir gratuitement au médiateur suivant : ${COMPANY.mediator}.` },
+  ],
+  en: [
+    { title: "Site publisher", body: `${COMPANY.name} — ${COMPANY.legalForm}. Registered office: ${COMPANY.address}. Registration: ${COMPANY.registration}. VAT number: ${COMPANY.vat}. Publication director: ${COMPANY.publisher}.` },
+    { title: "Contact", body: `Email: ${COMPANY.email}. Phone: ${COMPANY.phone}.` },
+    { title: "Hosting provider", body: COMPANY.host },
+    { title: "Payment", body: `Payments are processed by Paddle.com Market Limited, the Merchant of Record for our services. Buyer terms: ${PADDLE_TERMS_URL}.` },
+    { title: "Consumer mediation", body: `Under articles L611-1 et seq. of the French Consumer Code, you may use the following consumer mediator free of charge: ${COMPANY.mediator}.` },
+  ],
+};
+
+const T = {
+  fr: { title: "Mentions légales", subtitle: `Dernière mise à jour : ${COMPANY.lastUpdated.fr}` },
+  en: { title: "Legal Notice", subtitle: `Last updated: ${COMPANY.lastUpdated.en}` },
+};
+
+export default async function LegalNoticePage(props: PageProps<"/[locale]/mentions-legales">) {
+  const { locale: raw } = await props.params;
+  const locale: Locale = (LOCALES as readonly string[]).includes(raw) ? (raw as Locale) : DEFAULT_LOCALE;
+  return <LegalDocument title={T[locale].title} subtitle={T[locale].subtitle} sections={SECTIONS[locale]} />;
+}
