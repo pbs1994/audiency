@@ -13,7 +13,7 @@ const SECTIONS = {
     { title: "2. Utilisation des données", body: "Vos données sont utilisées pour traiter vos commandes, vous contacter en cas de besoin, et améliorer nos services. Nous ne vendons jamais vos données à des tiers." },
     { title: "3. Aucun accès à vos comptes", body: "BoostInflu ne demande jamais votre mot de passe et n’accède à aucun moment à vos comptes sur les réseaux sociaux." },
     { title: "4. Conservation des données", body: "Vos données sont conservées pour la durée nécessaire au traitement de votre commande et au respect de nos obligations légales, puis supprimées ou anonymisées." },
-    { title: "5. Vos droits", body: "Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et de suppression de vos données personnelles. Contactez-nous à contact@boostinflu.fr pour exercer ces droits." },
+    { title: "5. Vos droits", body: "Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et de suppression de vos données personnelles. Contactez-nous à contact@boostinflu.com pour exercer ces droits." },
     { title: "6. Cookies", body: "Nous utilisons des cookies strictement nécessaires au fonctionnement du site (panier, préférences de langue). Aucun cookie publicitaire tiers n’est utilisé sans votre consentement." },
   ],
   en: [
@@ -21,7 +21,7 @@ const SECTIONS = {
     { title: "2. How we use your data", body: "Your data is used to process your orders, contact you if needed, and improve our services. We never sell your data to third parties." },
     { title: "3. No access to your accounts", body: "BoostInflu never asks for your password and never accesses your social media accounts." },
     { title: "4. Data retention", body: "Your data is kept for as long as needed to process your order and meet our legal obligations, then deleted or anonymized." },
-    { title: "5. Your rights", body: "Under GDPR, you have the right to access, correct and delete your personal data. Contact us at contact@boostinflu.fr to exercise these rights." },
+    { title: "5. Your rights", body: "Under GDPR, you have the right to access, correct and delete your personal data. Contact us at contact@boostinflu.com to exercise these rights." },
     { title: "6. Cookies", body: "We use cookies strictly necessary for the site to function (cart, language preference). No third-party advertising cookie is used without your consent." },
   ],
 };

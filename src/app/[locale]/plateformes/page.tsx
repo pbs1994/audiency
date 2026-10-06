@@ -5,7 +5,7 @@ import PlatformLogo from "@/components/PlatformLogo";
 import { PLATFORMS } from "@/lib/platforms";
 import { LOCALES, DEFAULT_LOCALE, platformHref, type Locale } from "@/lib/i18n";
 
-const BASE_URL = "https://boostinflu.fr";
+const BASE_URL = "https://boostinflu.com";
 
 export async function generateMetadata(props: PageProps<"/[locale]/plateformes">): Promise<Metadata> {
   const { locale } = await props.params;

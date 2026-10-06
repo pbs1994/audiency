@@ -52,7 +52,7 @@ export default async function ContactPage(props: PageProps<"/[locale]/contact">)
               <Mail size={18} className="mt-0.5 shrink-0 text-violet" />
               <div>
                 <p className="font-semibold text-text">{t.email}</p>
-                <p className="text-sm text-text-muted">contact@boostinflu.fr</p>
+                <p className="text-sm text-text-muted">contact@boostinflu.com</p>
               </div>
             </div>
             <div className="flex items-start gap-3">

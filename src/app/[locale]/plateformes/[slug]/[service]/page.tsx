@@ -41,7 +41,7 @@ export function generateStaticParams() {
   );
 }
 
-const BASE_URL = "https://boostinflu.fr";
+const BASE_URL = "https://boostinflu.com";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/plateformes/[slug]/[service]">

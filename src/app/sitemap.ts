@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { PLATFORMS } from "@/lib/platforms";
 import { STATIC_ROUTES, routeHref, platformHref, serviceHref, type RouteKey } from "@/lib/i18n";
 
-const BASE_URL = "https://boostinflu.fr";
+const BASE_URL = "https://boostinflu.com";
 
 const PRIORITIES: Partial<Record<RouteKey, number>> = {
   home: 1,

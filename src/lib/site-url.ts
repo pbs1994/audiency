@@ -9,7 +9,7 @@ import { headers } from "next/headers";
  */
 export async function getOrigin(): Promise<string> {
   const headersList = await headers();
-  const host = headersList.get("host") ?? "boostinflu.fr";
+  const host = headersList.get("host") ?? "boostinflu.com";
   const protocol = host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https";
   return `${protocol}://${host}`;
 }

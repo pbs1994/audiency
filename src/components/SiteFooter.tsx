@@ -76,7 +76,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
                 <MessageCircle size={16} />
               </a>
               <a
-                href="mailto:contact@boostinflu.fr"
+                href="mailto:contact@boostinflu.com"
                 aria-label="Email"
                 className="grid h-9 w-9 place-items-center rounded-full border border-navy-line hover:border-on-navy-muted"
               >
