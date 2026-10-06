@@ -75,7 +75,7 @@ export default async function AccountOrdersPage(
   const { data: orders } = await supabase
     .from("orders")
     .select(
-      "id, status, total_eur, created_at, order_items(id, service_id, platform_slug, service_name, quantity, unit, line_total_eur, fulfillment_requests(status))"
+      "id, status, total_eur, created_at, order_items(id, service_variant_id, platform_slug, service_name, quantity, unit, line_total_eur, fulfillment_requests(status))"
     )
     .order("created_at", { ascending: false });
 
@@ -132,9 +132,9 @@ export default async function AccountOrdersPage(
                                 <p className="font-medium text-text">{item.service_name}</p>
                                 <p className="text-xs text-text-muted">
                                   {item.quantity} {item.unit}
-                                  {item.service_id && (
+                                  {item.service_variant_id && (
                                     <span className="ml-1.5 font-mono text-[10px] text-text-muted/70">
-                                      · {item.service_id}
+                                      · {item.service_variant_id}
                                     </span>
                                   )}
                                 </p>

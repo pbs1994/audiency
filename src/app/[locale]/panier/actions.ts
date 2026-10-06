@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getService } from "@/lib/platforms";
+import { getService, getVariantId } from "@/lib/platforms";
 import type { CartItem } from "@/lib/cart-context";
 
 export type CreateOrderResult = { orderId: string } | { error: string };
@@ -29,13 +29,18 @@ export async function createOrder(items: CartItem[]): Promise<CreateOrderResult>
   if (items.some((item) => !item.targetUrl?.trim())) return { error: "missing_target" };
 
   const payload = items.map((item) => {
-    // service_id is resolved from the trusted static catalog, never taken
-    // from the client, so it always matches a real ServiceItem.id.
+    // service_id / service_variant_id are resolved from the trusted static
+    // catalog, never taken from the client, so the code always matches a
+    // real ServiceItem and reflects what that service actually offers.
     const found =
       item.platformSlug && item.serviceSlug ? getService(item.platformSlug, item.serviceSlug) : undefined;
+    const variantId = found
+      ? getVariantId(found.service, item.quality ?? "standard", item.gender ?? "all")
+      : null;
 
     return {
       service_id: found?.service.id ?? null,
+      service_variant_id: variantId,
       platform_slug: item.platformSlug ?? "autre",
       service_slug: item.serviceSlug ?? "service",
       service_name: item.name,

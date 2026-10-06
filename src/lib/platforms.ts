@@ -22,6 +22,27 @@ export type ServiceItem = {
   genderOption?: boolean;
 };
 
+export type QualityChoice = "standard" | "premium";
+export type GenderChoice = "all" | "female" | "male";
+
+/**
+ * Stable variant code for a service + the quality/gender choice made at
+ * add-to-cart time — e.g. "IG-02-PREM-F". Quantity is NOT part of this
+ * code (it's a continuous value, not a catalog option): only suffixes
+ * that the service actually offers are appended, so a service with
+ * neither `followerType` nor `genderOption` just returns its own `id`.
+ */
+export function getVariantId(
+  service: Pick<ServiceItem, "id" | "followerType" | "genderOption">,
+  quality: QualityChoice,
+  gender: GenderChoice
+): string {
+  const parts = [service.id];
+  if (service.followerType) parts.push(quality === "premium" ? "PREM" : "STD");
+  if (service.genderOption) parts.push(gender === "female" ? "F" : gender === "male" ? "M" : "ALL");
+  return parts.join("-");
+}
+
 export type PlatformData = {
   slug: string;
   logoName: string;

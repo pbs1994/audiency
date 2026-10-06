@@ -127,6 +127,8 @@ export default function QuantityBuilder({
       serviceSlug,
       quantity: selected.qty,
       unit,
+      quality: followerType ? quality : undefined,
+      gender: genderOption ? gender : undefined,
     });
     router.push(routeHref(locale, "cart"));
   };

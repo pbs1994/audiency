@@ -15,6 +15,9 @@ export type CartItem = {
   quantity?: number;
   unit?: string;
   targetUrl?: string;
+  /** Only meaningful when the service offers that option (followerType / genderOption). */
+  quality?: "standard" | "premium";
+  gender?: "all" | "female" | "male";
 };
 
 type CartContextValue = {
