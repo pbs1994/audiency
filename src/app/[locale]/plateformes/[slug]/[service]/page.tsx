@@ -122,7 +122,7 @@ const T = {
     promiseTitle: "Notre promesse",
     promiseSubtitle: "Des garanties claires, sans petites lignes.",
     promises: [
-      { icon: ShieldCheck, title: "Satisfait ou remboursé", body: "Pas satisfait ? Remboursement intégral, sans question." },
+      { icon: ShieldCheck, title: "Satisfaction garantie", body: "Pas satisfait ? Nous relivrons ou vous offrons un autre service." },
       { icon: RefreshCcw, title: "Garantie de réassort", body: "Une baisse dans les 30 jours ? Nous relivrons gratuitement." },
       { icon: Headphones, title: "Support 24/7", body: "Notre équipe est disponible à toute heure pour vous aider." },
     ],
@@ -184,7 +184,7 @@ const T = {
     promiseTitle: "Our promise",
     promiseSubtitle: "Clear guarantees, no fine print.",
     promises: [
-      { icon: ShieldCheck, title: "Money-back guarantee", body: "Not satisfied? Full refund, no questions asked." },
+      { icon: ShieldCheck, title: "Satisfaction guaranteed", body: "Not satisfied? We'll re-deliver or give you another service for free." },
       { icon: RefreshCcw, title: "Refill guarantee", body: "A drop within 30 days? We'll refill it for free." },
       { icon: Headphones, title: "24/7 support", body: "Our team is available around the clock to help you." },
     ],

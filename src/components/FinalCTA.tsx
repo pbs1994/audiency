@@ -5,13 +5,13 @@ const T = {
     heading: "Prêt à devenir viral ?",
     subtitle: "Rejoignez des milliers de créateurs qui ont transformé leur présence sociale avec BoostInflu. Démarrez votre croissance aujourd’hui.",
     cta: "Démarrer maintenant",
-    points: ["Démarrage immédiat", "Satisfait ou remboursé", "Aucun mot de passe requis"],
+    points: ["Démarrage immédiat", "Satisfaction garantie", "Aucun mot de passe requis"],
   },
   en: {
     heading: "Ready to go viral?",
     subtitle: "Join thousands of creators who transformed their social presence with BoostInflu. Start your growth today.",
     cta: "Start now",
-    points: ["Instant start", "Money-back guarantee", "No password required"],
+    points: ["Instant start", "Satisfaction guaranteed", "No password required"],
   },
 };
 

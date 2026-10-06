@@ -21,8 +21,8 @@ const T = {
     heading: "Prix les plus bas garantis, ",
     headingAccent: "100% réels",
     subtitle: "Des abonnés et un engagement authentiques, à des prix imbattables grâce à notre garantie du meilleur prix.",
-    bannerTitle: "Satisfait ou remboursé",
-    bannerBody: "Pas satisfait ? Remboursement intégral sous 30 jours.",
+    bannerTitle: "Satisfaction garantie",
+    bannerBody: "Pas satisfait ? Nous relivrons ou vous offrons un autre service.",
   },
   en: {
     badge: "Best guarantee",
@@ -30,7 +30,7 @@ const T = {
     headingAccent: "100% real",
     subtitle: "Authentic followers and engagement, at unbeatable prices thanks to our best-price guarantee.",
     bannerTitle: "Satisfaction guaranteed",
-    bannerBody: "Not satisfied? Full refund within 30 days.",
+    bannerBody: "Not satisfied? We'll re-deliver or give you another service for free.",
   },
 };
 
