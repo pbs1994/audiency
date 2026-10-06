@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getService } from "@/lib/platforms";
 import type { CartItem } from "@/lib/cart-context";
 
 export type CreateOrderResult = { orderId: string } | { error: string };
@@ -27,16 +28,24 @@ export async function createOrder(items: CartItem[]): Promise<CreateOrderResult>
   if (items.length === 0) return { error: "empty_cart" };
   if (items.some((item) => !item.targetUrl?.trim())) return { error: "missing_target" };
 
-  const payload = items.map((item) => ({
-    platform_slug: item.platformSlug ?? "autre",
-    service_slug: item.serviceSlug ?? "service",
-    service_name: item.name,
-    target_url: item.targetUrl!.trim(),
-    quantity: item.quantity ?? 1,
-    unit: item.unit ?? "unités",
-    unit_price_eur: item.priceValue / (item.quantity ?? 1),
-    line_total_eur: item.priceValue,
-  }));
+  const payload = items.map((item) => {
+    // service_id is resolved from the trusted static catalog, never taken
+    // from the client, so it always matches a real ServiceItem.id.
+    const found =
+      item.platformSlug && item.serviceSlug ? getService(item.platformSlug, item.serviceSlug) : undefined;
+
+    return {
+      service_id: found?.service.id ?? null,
+      platform_slug: item.platformSlug ?? "autre",
+      service_slug: item.serviceSlug ?? "service",
+      service_name: item.name,
+      target_url: item.targetUrl!.trim(),
+      quantity: item.quantity ?? 1,
+      unit: item.unit ?? "unités",
+      unit_price_eur: item.priceValue / (item.quantity ?? 1),
+      line_total_eur: item.priceValue,
+    };
+  });
 
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("place_order", {
